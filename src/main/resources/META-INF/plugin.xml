@@ -1,0 +1,31 @@
+<idea-plugin>
+    <id>com.github.studyzy.codei18n-jetbrains</id>
+    <name>CodeI18n</name>
+    <vendor email="support@example.com" url="https://github.com/studyzy/codei18n-jetbrains">CodeI18n Team</vendor>
+
+    <description><![CDATA[
+    Internationalization for code comments.<br>
+    Display translated comments in your IDE without modifying the source code.
+    ]]></description>
+
+    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.plugins.go</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="com.github.studyzy.codei18n.utils.ProcessExecutor"/>
+        <applicationConfigurable
+            parentId="tools"
+            instance="com.github.studyzy.codei18n.settings.PluginSettingsConfigurable"
+            id="com.github.studyzy.codei18n.settings.PluginSettingsConfigurable"
+            displayName="CodeI18n"/>
+        <codeInsight.inlayProvider
+            language="go"
+            implementationClass="com.github.studyzy.codei18n.providers.TranslationInlayHintsProvider"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>
