@@ -20,9 +20,30 @@
             instance="com.github.studyzy.codei18n.settings.PluginSettingsConfigurable"
             id="com.github.studyzy.codei18n.settings.PluginSettingsConfigurable"
             displayName="CodeI18n"/>
+        
+        <!-- 注释翻译注解器：显示中文翻译，隐藏英文原文 -->
+        <annotator
+            language="go"
+            implementationClass="com.github.studyzy.codei18n.providers.CommentTranslationAnnotator"/>
+        
+        <!-- Inlay Hints 方式（已禁用，改用 Annotator）
         <codeInsight.inlayProvider
             language="go"
             implementationClass="com.github.studyzy.codei18n.providers.TranslationInlayHintsProvider"/>
+        -->
+        
+        <!-- 注释文档提供者：鼠标悬停时显示英文原文 -->
+        <lang.documentationProvider
+            language="go"
+            implementationClass="com.github.studyzy.codei18n.providers.CommentDocumentationProvider"
+            order="first"/>
+        
+        <!-- 旧的 Folding 实现（已禁用，改用 Inlay Hints 方式）
+        <lang.foldingBuilder
+            language="go"
+            implementationClass="com.github.studyzy.codei18n.providers.CommentTranslationFoldingBuilder"
+            order="first"/>
+        -->
     </extensions>
 
     <actions>

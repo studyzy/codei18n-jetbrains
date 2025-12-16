@@ -90,13 +90,11 @@ public final class CliService {
         return output != null;
     }
 
-    public String scanFile(String filePath, String language, boolean withTranslations, boolean stdin, String content) {
+    public String scanFile(String filePath, boolean withTranslations, boolean stdin, String content) {
         List<String> args = new ArrayList<>();
         args.add("scan");
         args.add("--file");
         args.add(filePath);
-        args.add("--lang");
-        args.add(language);
         args.add("--format");
         args.add("json");
         

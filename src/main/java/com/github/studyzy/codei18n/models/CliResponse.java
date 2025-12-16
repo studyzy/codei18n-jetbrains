@@ -23,7 +23,7 @@ public class CliResponse {
         private String symbol;
         private TextRange range;
         private String sourceText;
-        private String translation;
+        private String localizedText;  // CLI 返回的字段名是 localizedText
 
         public String getId() { return id; }
         public void setId(String id) { this.id = id; }
@@ -43,8 +43,11 @@ public class CliResponse {
         public String getSourceText() { return sourceText; }
         public void setSourceText(String sourceText) { this.sourceText = sourceText; }
 
-        public String getTranslation() { return translation; }
-        public void setTranslation(String translation) { this.translation = translation; }
+        public String getLocalizedText() { return localizedText; }
+        public void setLocalizedText(String localizedText) { this.localizedText = localizedText; }
+        
+        // 为了兼容性，保留 getTranslation 方法
+        public String getTranslation() { return localizedText; }
     }
 
     public static class TextRange {

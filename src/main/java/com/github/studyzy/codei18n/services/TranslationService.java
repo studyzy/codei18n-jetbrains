@@ -14,9 +14,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.Alarm;
-import com.intellij.util.containers.ContainerUtil;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +28,12 @@ public final class TranslationService implements Disposable {
 
     public TranslationService(Project project) {
         this.project = project;
-        this.cache = ContainerUtil.createLRUMap(100);
+        this.cache = Collections.synchronizedMap(new LinkedHashMap<String, List<TranslatedComment>>(100, 0.75f, true) {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<String, List<TranslatedComment>> eldest) {
+                return size() > 100;
+            }
+        });
         this.debounceAlarm = new Alarm(Alarm.ThreadToUse.POOLED_THREAD, this);
     }
 
@@ -63,11 +68,9 @@ public final class TranslationService implements Disposable {
         
         debounceAlarm.addRequest(() -> {
             CliService cliService = CliService.getInstance(project);
-            PluginSettings settings = PluginSettings.getInstance();
             
             String json = cliService.scanFile(
                 relativePath, 
-                settings.cliConfiguration.getTargetLanguage(), 
                 true, 
                 true, 
                 content
