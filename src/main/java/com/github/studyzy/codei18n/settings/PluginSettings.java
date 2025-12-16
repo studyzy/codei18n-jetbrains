@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 public final class PluginSettings implements PersistentStateComponent<PluginSettings> {
     
     public boolean enabled = true;
-    public DisplayMode displayMode = DisplayMode.INLAY_HINT;
+    public DisplayMode displayMode = DisplayMode.FOLDING;
     public CliConfiguration cliConfiguration = new CliConfiguration();
     public boolean cacheEnabled = true;
     public int maxCacheSize = 100;

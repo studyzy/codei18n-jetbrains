@@ -13,6 +13,11 @@
     <depends>com.intellij.modules.platform</depends>
     <depends>org.jetbrains.plugins.go</depends>
 
+    <projectListeners>
+        <listener class="com.github.studyzy.codei18n.listeners.FileOpenListener"
+                  topic="com.intellij.openapi.fileEditor.FileEditorManagerListener"/>
+    </projectListeners>
+    
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.studyzy.codei18n.utils.ProcessExecutor"/>
         <applicationConfigurable
@@ -21,16 +26,11 @@
             id="com.github.studyzy.codei18n.settings.PluginSettingsConfigurable"
             displayName="CodeI18n"/>
         
-        <!-- 注释翻译注解器：显示中文翻译，隐藏英文原文 -->
-        <annotator
+        <!-- 注释翻译折叠构建器：折叠英文注释，显示中文翻译 -->
+        <lang.foldingBuilder
             language="go"
-            implementationClass="com.github.studyzy.codei18n.providers.CommentTranslationAnnotator"/>
-        
-        <!-- Inlay Hints 方式（已禁用，改用 Annotator）
-        <codeInsight.inlayProvider
-            language="go"
-            implementationClass="com.github.studyzy.codei18n.providers.TranslationInlayHintsProvider"/>
-        -->
+            implementationClass="com.github.studyzy.codei18n.providers.CommentTranslationFoldingBuilder"
+            order="first"/>
         
         <!-- 注释文档提供者：鼠标悬停时显示英文原文 -->
         <lang.documentationProvider
@@ -38,11 +38,16 @@
             implementationClass="com.github.studyzy.codei18n.providers.CommentDocumentationProvider"
             order="first"/>
         
-        <!-- 旧的 Folding 实现（已禁用，改用 Inlay Hints 方式）
-        <lang.foldingBuilder
+        <!-- 注释翻译注解器（已禁用，改用 Folding 方式）
+        <annotator
             language="go"
-            implementationClass="com.github.studyzy.codei18n.providers.CommentTranslationFoldingBuilder"
-            order="first"/>
+            implementationClass="com.github.studyzy.codei18n.providers.CommentTranslationAnnotator"/>
+        -->
+        
+        <!-- Inlay Hints 方式（已禁用，改用 Folding 方式）
+        <codeInsight.inlayProvider
+            language="go"
+            implementationClass="com.github.studyzy.codei18n.providers.TranslationInlayHintsProvider"/>
         -->
     </extensions>
 

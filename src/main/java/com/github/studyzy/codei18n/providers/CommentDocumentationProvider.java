@@ -1,5 +1,7 @@
 package com.github.studyzy.codei18n.providers;
 
+import com.github.studyzy.codei18n.models.TranslatedComment;
+import com.github.studyzy.codei18n.services.TranslationService;
 import com.github.studyzy.codei18n.settings.PluginSettings;
 import com.intellij.lang.documentation.AbstractDocumentationProvider;
 import com.intellij.openapi.editor.Editor;
@@ -8,6 +10,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 /**
  * 注释文档提供者
@@ -25,11 +29,50 @@ public class CommentDocumentationProvider extends AbstractDocumentationProvider 
         // 检查是否为注释
         if (element instanceof PsiComment) {
             PsiComment comment = (PsiComment) element;
+            
+            // 尝试从翻译服务获取原始英文注释
+            String originalText = getOriginalText(comment);
+            
+            if (originalText != null && !originalText.isEmpty()) {
+                String cleanText = cleanCommentText(originalText);
+                // 返回格式化的文档
+                return formatDocumentation("英文原文", cleanText);
+            }
+            
+            // 如果没有翻译数据，直接显示注释原文
             String commentText = comment.getText();
             String cleanText = cleanCommentText(commentText);
+            return formatDocumentation("注释内容", cleanText);
+        }
+        
+        return null;
+    }
+    
+    /**
+     * 获取注释的原始英文文本
+     */
+    private String getOriginalText(PsiComment comment) {
+        try {
+            TranslationService translationService = TranslationService.getInstance(comment.getProject());
+            List<TranslatedComment> translations = translationService.getTranslations(
+                comment.getContainingFile(),
+                false
+            );
             
-            // 返回格式化的文档
-            return formatDocumentation("英文原文", cleanText);
+            int startOffset = comment.getTextRange().getStartOffset();
+            
+            for (TranslatedComment translatedComment : translations) {
+                if (translatedComment.getStartOffset() == startOffset) {
+                    // 返回存储的源文本（英文原文）
+                    String sourceText = translatedComment.getSourceText();
+                    if (sourceText != null && !sourceText.isEmpty()) {
+                        return sourceText;
+                    }
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            // 忽略错误，返回 null 使用默认行为
         }
         
         return null;
