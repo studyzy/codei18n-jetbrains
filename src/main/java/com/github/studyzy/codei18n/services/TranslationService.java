@@ -95,8 +95,8 @@ public final class TranslationService implements Disposable {
         final String content = file.getText();
         
         try {
-            // 在后台线程同步执行
-            List<TranslatedComment> result = fetchTranslationsSync(file, relativePath, content);
+            // 在后台线程同步执行（避免在ReadAction内直接运行外部进程）
+            List<TranslatedComment> result = fetchTranslationsSync(file, relativePath, content, timeoutMs);
             if (result != null && !result.isEmpty()) {
                 cache.put(relativePath, result);
                 return result;
@@ -111,27 +111,60 @@ public final class TranslationService implements Disposable {
     }
     
     /**
-     * 同步获取翻译数据（直接调用 CLI）
+     * 同步获取翻译数据（直接调用 CLI），在后台线程运行以避免 ReadAction/EDT 阻塞
      */
-    private List<TranslatedComment> fetchTranslationsSync(PsiFile file, String relativePath, String content) {
+    private List<TranslatedComment> fetchTranslationsSync(PsiFile file, String relativePath, String content, long timeoutMs) {
         CliService cliService = CliService.getInstance(project);
+        CountDownLatch latch = new CountDownLatch(1);
+        AtomicReference<String> jsonRef = new AtomicReference<>();
         
-        String json = cliService.scanFile(
-            relativePath, 
-            true, 
-            true, 
-            content
-        );
-
+        ApplicationManager.getApplication().executeOnPooledThread(() -> {
+            try {
+                String json = cliService.scanFile(
+                    relativePath,
+                    true,
+                    true,
+                    content
+                );
+                jsonRef.set(json);
+            } finally {
+                latch.countDown();
+            }
+        });
+        
+        try {
+            boolean done = latch.await(timeoutMs, TimeUnit.MILLISECONDS);
+            if (!done) {
+                LOG.warn("CLI execution timeout for file: " + relativePath);
+                return null;
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            LOG.warn("CLI execution interrupted for file: " + relativePath, e);
+            return null;
+        }
+        
+        String json = jsonRef.get();
         if (json == null) {
             LOG.warn("CLI returned null for file: " + relativePath);
             return null;
         }
+        
+        // TEMPORARY: Force log CLI response to debug the issue
+        LOG.warn("CLI response for " + relativePath + ": " + json);
 
         CliResponse response = JsonParser.parseCliResponse(json);
-        if (response == null || response.getComments() == null) {
+        if (response == null) {
             LOG.warn("Failed to parse CLI response for file: " + relativePath);
             return null;
+        }
+        if (response.errors() != null && !response.errors().isEmpty()) {
+            LOG.warn("CLI reported errors for file: " + relativePath + " -> " + response.errors());
+        }
+        List<CliResponse.CommentData> commentDataList = response.comments();
+        if (commentDataList == null) {
+            LOG.info("CLI returned no comments for file: " + relativePath);
+            return Collections.emptyList();
         }
 
         List<TranslatedComment> translations = new ArrayList<>();
@@ -142,25 +175,28 @@ public final class TranslationService implements Disposable {
         );
         
         if (document != null) {
-            for (CliResponse.CommentData data : response.getComments()) {
+            for (CliResponse.CommentData data : response.comments()) {
                 if (data.getTranslation() != null && !data.getTranslation().isEmpty()) {
-                    TranslatedComment comment = new TranslatedComment();
-                    comment.setCommentId(data.getId());
-                    comment.setSourceText(data.getSourceText());
-                    comment.setTranslation(data.getTranslation());
-                    
-                    int startLine = data.getRange().getStartLine() - 1;
-                    int startCol = data.getRange().getStartCol() - 1;
-                    int endLine = data.getRange().getEndLine() - 1;
-                    int endCol = data.getRange().getEndCol() - 1;
+                    int startLine = data.range().startLine() - 1;
+                    int startCol = data.range().startCol() - 1;
+                    int endLine = data.range().endLine() - 1;
+                    int endCol = data.range().endCol() - 1;
                     
                     if (startLine >= 0 && startLine < document.getLineCount() && 
                         endLine >= 0 && endLine < document.getLineCount()) {
                         int startOffset = document.getLineStartOffset(startLine) + startCol;
                         int endOffset = document.getLineStartOffset(endLine) + endCol;
-                        comment.setStartOffset(startOffset);
-                        comment.setEndOffset(endOffset);
-                        comment.setLineNumber(data.getRange().getStartLine());
+                        
+                        TranslatedComment comment = new TranslatedComment(
+                            data.id(),
+                            data.sourceText(),
+                            data.getTranslation(),
+                            startOffset,
+                            endOffset,
+                            data.range().startLine(),
+                            TranslatedComment.CommentType.LINE,
+                            data.symbol()
+                        );
                         translations.add(comment);
                     }
                 }
@@ -178,7 +214,7 @@ public final class TranslationService implements Disposable {
         final String content = file.getText();
         
         debounceAlarm.addRequest(() -> {
-            List<TranslatedComment> translations = fetchTranslationsSync(file, relativePath, content);
+            List<TranslatedComment> translations = fetchTranslationsSync(file, relativePath, content, 5000);
             
             if (translations != null) {
                 cache.put(relativePath, translations);

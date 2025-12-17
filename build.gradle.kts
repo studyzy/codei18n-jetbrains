@@ -6,6 +6,13 @@ plugins {
 group = "com.github.studyzy"
 version = "0.1.0"
 
+// Configure Java toolchain to use Java 21
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
 repositories {
     mavenCentral()
     intellijPlatform {
@@ -18,9 +25,9 @@ val ideType = project.findProperty("intellij.type")?.toString() ?: "GO"
 val localIdePath = project.findProperty("intellij.localPath")?.toString()
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
-    testImplementation("org.mockito:mockito-core:5.6.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.4")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.4")
+    testImplementation("org.mockito:mockito-core:5.14.2")
     
     // IntelliJ Platform dependencies
     intellijPlatform {
@@ -30,13 +37,13 @@ dependencies {
                 local(localIdePath)
             }
             ideType == "GO" -> {
-                goland("2023.3")
+                goland("2024.3")
             }
             ideType == "RR" -> {
                 rustRover("2024.3")
             }
             else -> {
-                create("IC", "2023.3")
+                create("IC", "2024.3")
             }
         }
         
@@ -50,13 +57,16 @@ dependencies {
         }
         
         pluginVerifier()
+        
+        // Use JetBrains Runtime
+        jetbrainsRuntime()
     }
 }
 
 intellijPlatform {
     pluginConfiguration {
         ideaVersion {
-            sinceBuild = "233"
+            sinceBuild = "243"
             untilBuild = "253.*"
         }
     }
@@ -77,10 +87,10 @@ intellijPlatform {
 }
 
 tasks {
-    // Set the JVM compatibility versions - use 17 for compatibility
+    // Set the JVM compatibility versions - use 21 for latest IDE compatibility
     withType<JavaCompile> {
-        sourceCompatibility = "17"
-        targetCompatibility = "17"
+        sourceCompatibility = "21"
+        targetCompatibility = "21"
     }
 
     test {

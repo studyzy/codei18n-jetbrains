@@ -39,8 +39,9 @@ public class CommentTranslationAnnotator implements Annotator {
             return;
         }
         
-        // 仅处理 Go 文件
-        if (!element.getContainingFile().getName().endsWith(".go")) {
+        // 支持 Go 和 Rust 文件
+        String filename = element.getContainingFile().getName();
+        if (!filename.endsWith(".go") && !filename.endsWith(".rs")) {
             return;
         }
         
@@ -58,8 +59,8 @@ public class CommentTranslationAnnotator implements Annotator {
             
             // 查找匹配的翻译
             for (TranslatedComment translatedComment : translations) {
-                if (translatedComment.getStartOffset() == startOffset) {
-                    String translation = translatedComment.getTranslation();
+                if (translatedComment.startOffset() == startOffset) {
+                    String translation = translatedComment.translation();
                     
                     if (translation != null && !translation.isEmpty()) {
                         // 格式化翻译文本
@@ -95,7 +96,11 @@ public class CommentTranslationAnnotator implements Annotator {
      * 格式化翻译文本，保留注释符号
      */
     private String formatTranslation(String originalComment, String translation) {
-        if (originalComment.startsWith("//")) {
+        if (originalComment.startsWith("///")) {
+            return "/// " + translation;
+        } else if (originalComment.startsWith("//!")) {
+            return "//! " + translation;
+        } else if (originalComment.startsWith("//")) {
             return "// " + translation;
         } else if (originalComment.startsWith("/*") && originalComment.endsWith("*/")) {
             return "/* " + translation + " */";

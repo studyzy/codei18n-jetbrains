@@ -265,6 +265,6 @@
 ## 依赖关系
 
 - IntelliJ Platform SDK 2023.3+
-- JDK 17+（插件开发环境）
+- JDK 21+（插件开发环境）
 - codei18n CLI v0.1.0+（运行时依赖）
 - Go 语言插件（IntelliJ IDEA 用户需要）

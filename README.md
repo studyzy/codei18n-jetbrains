@@ -16,9 +16,9 @@
 
 ## 支持的IDE
 
-- GoLand 2023.3+
-- IntelliJ IDEA 2023.3+
-- RustRover 2023.3+
+- GoLand 2024.3+
+- IntelliJ IDEA 2024.3+
+- RustRover 2024.3+
 
 ## 安装
 
@@ -98,16 +98,65 @@ fn fib(n: u32) -> u32 {
 
 ## 开发
 
-### 构建项目
+### 快速开始
 
 ```bash
-./gradlew build
+# 构建插件 (快速,使用本地IDE)
+make build-local
+
+# 运行插件 (自动下载IDE)
+make run-goland
+
+# 查看所有命令
+make help
 ```
 
-### 运行沙盒 IDE
+### 重要提示⚠️
+
+如果您的本地IDE是 2025.x 版本,直接运行可能会遇到兼容性问题。请查看 [RUN_GUIDE.md](RUN_GUIDE.md) 了解详细的运行方案。
+
+**推荐工作流程**:
+1. 使用 `make build-local` 快速构建 (~10秒)
+2. 手动安装到本地IDE测试
+3. 发布前使用 `make run-goland` 完整测试
+
+### 使用 Makefile
 
 ```bash
-./gradlew runIde
+# 快速构建 (使用本地IDE)
+make build-local
+
+# 标准构建 (下载IDE)
+make build
+
+# 运行 GoLand
+make run-goland
+
+# 运行 RustRover  
+make run-rustrover
+
+# 运行测试
+make test
+
+# 构建发布包
+make release
+
+# 清理
+make clean
+```
+
+### 使用 Gradle 命令
+
+```bash
+# 快速构建 (使用本地IDE)
+./gradlew buildPlugin -Pintellij.localPath=/Applications/GoLand.app
+
+# 标准构建 (下载IDE)
+./gradlew buildPlugin
+
+# 运行 (下载IDE)
+./gradlew runIde -Pintellij.type=GO
+```
 ```
 
 ### 测试

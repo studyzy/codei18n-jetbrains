@@ -1,0 +1,13 @@
+# Local IDE Configuration Template
+# Copy this file to local.properties and customize the paths
+
+# Path to your local GoLand installation
+# Default: /Applications/GoLand.app
+goland.path=/Applications/GoLand.app
+
+# Path to your local RustRover installation  
+# Default: /Applications/RustRover.app
+rustrover.path=/Applications/RustRover.app
+
+# Uncomment and set if you want to use a specific IDE by default
+# intellij.localPath=/Applications/GoLand.app

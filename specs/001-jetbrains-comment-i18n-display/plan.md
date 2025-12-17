@@ -20,7 +20,7 @@
 
 **技术方法**:
 - 使用 IntelliJ Platform Plugin SDK 开发插件
-- 使用 Java 17+ 和 Gradle 构建系统
+- 使用 Java 21+ 和 Gradle 构建系统
 - 利用 PSI (Program Structure Interface) 解析 Go 源代码
 - 通过 ProcessBuilder 调用 codei18n CLI 子进程
 - 使用 FoldingBuilder 实现注释的替换显示(默认折叠显示翻译)
@@ -31,10 +31,10 @@
 
 ## 技术背景
 
-**语言/版本**: Java 17 (推荐, IntelliJ Platform 2023.3 最低要求 Java 17)
+**语言/版本**: Java 21 (推荐, 支持最新IntelliJ Platform特性)
 **主要依赖**: 
 - IntelliJ Platform SDK 2023.3+
-- Gradle 8.0+ (Gradle IntelliJ Plugin)
+- Gradle 8.11+ (Gradle IntelliJ Plugin)
 - JUnit 5 + Mockito (测试框架)
 - PSI (Program Structure Interface, 代码解析)
 - codei18n CLI v0.1.0+ (外部运行时依赖)
@@ -91,7 +91,7 @@
 - [x] 可观测性: 使用 IntelliJ Platform Logger, 设置 DEBUG/INFO/WARN/ERROR 日志级别, 记录关键操作
 
 **技术约束验证**:
-- [x] 技术栈: 使用 Java 17, Gradle 8.0+, JUnit 5 + Mockito, 满足要求
+- [x] 技术栈: 使用 Java 21, Gradle 8.11+, JUnit 5 + Mockito, 满足要求
 - [x] 性能: UI 操作异步执行, 目标响应 < 100ms, CLI 调用后台线程, 超时 5 秒
 - [x] 安全: 验证 CLI 路径防止命令注入, 不记录敏感信息, 配置加密存储 (如需要)
 

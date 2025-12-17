@@ -14,7 +14,7 @@
 
 ## 技术背景
 
-**语言/版本**: Java 17 (项目当前设置), Rust (目标语言支持)
+**语言/版本**: Java 21 (项目当前设置), Rust (目标语言支持)
 **主要依赖**:
 - `org.jetbrains.plugins.go` (现有)
 - `codei18n` CLI (核心，负责 Rust 注释解析和翻译)
@@ -39,7 +39,7 @@
 - [x] 可观测性: 使用 `com.intellij.openapi.diagnostic.Logger`.
 
 **技术约束验证**:
-- [x] 技术栈: Java 17, Gradle Kotlin DSL.
+- [x] 技术栈: Java 21, Gradle Kotlin DSL.
 - [x] 性能: 解析使用 `FoldingBuilder` (后台高亮传递), 翻译服务带缓存和去抖动.
 - [x] 安全: 无新的安全风险, 仅读取文件内容传递给 CLI.
 

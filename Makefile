@@ -1,16 +1,20 @@
-.PHONY: build test run-goland run-rustrover clean help
+.PHONY: build test run-goland run-rustrover build-local clean help
 
 help:
 	@echo "Available commands:"
-	@echo "  build        - Build the plugin"
-	@echo "  test         - Run tests"
-	@echo "  run-goland   - Run the plugin in a sandboxed GoLand IDE"
-	@echo "  run-rustrover - Run the plugin in a sandboxed RustRover IDE"
-	@echo "  release      - Build the plugin package for offline installation"
-	@echo "  clean        - Clean build artifacts"
+	@echo "  build          - Build the plugin (downloads IDE if needed)"
+	@echo "  build-local    - Build using local GoLand (faster but may have issues)"
+	@echo "  test           - Run tests"
+	@echo "  run-goland     - Run the plugin in GoLand IDE"
+	@echo "  run-rustrover  - Run the plugin in RustRover IDE"
+	@echo "  release        - Build the plugin package for offline installation"
+	@echo "  clean          - Clean build artifacts"
 
 build:
 	./gradlew buildPlugin -x buildSearchableOptions
+
+build-local:
+	./gradlew buildPlugin -x buildSearchableOptions -Pintellij.localPath=/Applications/GoLand.app
 
 test:
 	./gradlew test

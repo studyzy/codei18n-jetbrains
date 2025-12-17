@@ -62,17 +62,19 @@ public class CommentDocumentationProvider extends AbstractDocumentationProvider 
             int startOffset = comment.getTextRange().getStartOffset();
             
             for (TranslatedComment translatedComment : translations) {
-                if (translatedComment.getStartOffset() == startOffset) {
-                    // 返回存储的源文本（英文原文）
-                    String sourceText = translatedComment.getSourceText();
+                if (translatedComment.startOffset() == startOffset) {
+                    // 返回存储的源文本(英文原文)
+                    String sourceText = translatedComment.sourceText();
                     if (sourceText != null && !sourceText.isEmpty()) {
                         return sourceText;
                     }
-                    break;
+                    // 如果sourceText为空,返回注释本身的文本
+                    return comment.getText();
                 }
             }
         } catch (Exception e) {
-            // 忽略错误，返回 null 使用默认行为
+            // 忽略错误,返回注释本身的文本作为后备
+            return comment.getText();
         }
         
         return null;

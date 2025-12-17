@@ -33,8 +33,9 @@ public class FileOpenListener implements FileEditorManagerListener {
     
     @Override
     public void fileOpened(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
-        // 只处理 Go 文件
-        if (!file.getName().endsWith(".go")) {
+        // 支持 Go 和 Rust 文件
+        String filename = file.getName();
+        if (!filename.endsWith(".go") && !filename.endsWith(".rs")) {
             return;
         }
         

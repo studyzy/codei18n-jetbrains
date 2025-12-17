@@ -97,8 +97,8 @@ public class CommentTranslationFoldingBuilder extends FoldingBuilderEx {
                     
                     // 查找匹配的翻译
                     for (TranslatedComment translatedComment : translations) {
-                        if (translatedComment.getStartOffset() == startOffset) {
-                            String translation = translatedComment.getTranslation();
+                        if (translatedComment.startOffset() == startOffset) {
+                            String translation = translatedComment.translation();
                             
                             if (translation != null && !translation.isEmpty()) {
                                 // 格式化翻译文本（保留注释符号）
@@ -158,7 +158,17 @@ public class CommentTranslationFoldingBuilder extends FoldingBuilderEx {
         // 去除翻译文本首尾空白
         String trimmedTranslation = translation.trim();
         
-        if (originalComment.startsWith("//")) {
+        if (originalComment.startsWith("///")) {
+            if (trimmedTranslation.startsWith("///")) {
+                return trimmedTranslation;
+            }
+            return "/// " + trimmedTranslation;
+        } else if (originalComment.startsWith("//!")) {
+            if (trimmedTranslation.startsWith("//!")) {
+                return trimmedTranslation;
+            }
+            return "//! " + trimmedTranslation;
+        } else if (originalComment.startsWith("//")) {
             // 检查翻译是否已经以 // 开头
             if (trimmedTranslation.startsWith("//")) {
                 return trimmedTranslation;

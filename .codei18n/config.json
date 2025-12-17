@@ -6,6 +6,6 @@
     "vendor/**",
     ".codei18n/**"
   ],
-  "translationProvider": "google",
+  "translationProvider": "mock",
   "translationConfig": {}
 }

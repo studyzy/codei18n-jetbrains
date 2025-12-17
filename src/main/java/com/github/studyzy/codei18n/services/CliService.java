@@ -71,32 +71,25 @@ public final class CliService {
     }
 
     public String getVersion(String cliPath) {
-        List<String> args = List.of("version");
-        return executeCommand(cliPath, args, null, 5000);
+        return executeCommand(cliPath, List.of("version"), null, 5000);
     }
 
     public boolean initProject(String cliPath, String sourceLang, String localLang) {
-        List<String> args = new ArrayList<>();
+        var args = new ArrayList<String>();
         args.add("init");
         if (sourceLang != null) {
-            args.add("--source-lang");
-            args.add(sourceLang);
+            args.addAll(List.of("--source-lang", sourceLang));
         }
         if (localLang != null) {
-            args.add("--local-lang");
-            args.add(localLang);
+            args.addAll(List.of("--local-lang", localLang));
         }
         String output = executeCommand(cliPath, args, project.getBasePath(), 10000);
         return output != null;
     }
 
     public String scanFile(String filePath, boolean withTranslations, boolean stdin, String content) {
-        List<String> args = new ArrayList<>();
-        args.add("scan");
-        args.add("--file");
-        args.add(filePath);
-        args.add("--format");
-        args.add("json");
+        var args = new ArrayList<String>();
+        args.addAll(List.of("scan", "--file", filePath, "--format", "json"));
         
         if (withTranslations) {
             args.add("--with-translations");

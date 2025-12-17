@@ -4,7 +4,7 @@
 
 ## 前置条件
 
-1. **JDK 17**: 确保已安装并配置 `JAVA_HOME`.
+1. **JDK 21**: 确保已安装并配置 `JAVA_HOME`.
 2. **Gradle**: 项目使用 Gradle Wrapper, 无需手动安装.
 3. **GoLand / IntelliJ IDEA**: 用于开发和调试插件.
 4. **codei18n CLI**: 确保 `codei18n` 已安装并在 PATH 中.

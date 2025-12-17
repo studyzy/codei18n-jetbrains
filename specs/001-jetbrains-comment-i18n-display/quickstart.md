@@ -20,8 +20,8 @@
 
 确保已安装以下工具:
 
-- **Java JDK 17+**: `java -version`
-- **Gradle 8.0+**: `gradle -version`
+- **Java JDK 21+**: `java -version`
+- **Gradle 8.11+**: `gradle -version`
 - **IntelliJ IDEA Ultimate/Community 2023.3+**: 用于开发和测试
 - **Go 1.21+**: 用于测试 Go 文件解析
 - **codei18n CLI v0.1.0+**: 用于集成测试
