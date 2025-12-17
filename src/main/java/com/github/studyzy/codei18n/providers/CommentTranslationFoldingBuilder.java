@@ -40,6 +40,11 @@ public class CommentTranslationFoldingBuilder extends FoldingBuilderEx {
     ) {
         PluginSettings settings = PluginSettings.getInstance();
         
+        // 如果设置未初始化，返回空数组（用于测试环境）
+        if (settings == null) {
+            return FoldingDescriptor.EMPTY_ARRAY;
+        }
+        
         // 如果插件未启用，返回空数组
         if (!settings.enabled) {
             return FoldingDescriptor.EMPTY_ARRAY;
@@ -50,8 +55,8 @@ public class CommentTranslationFoldingBuilder extends FoldingBuilderEx {
             return FoldingDescriptor.EMPTY_ARRAY;
         }
         
-        // 仅处理 Go 文件
-        if (!isGoFile(root)) {
+        // 仅处理支持的文件类型（Go 和 Rust）
+        if (!isSupportedFile(root)) {
             return FoldingDescriptor.EMPTY_ARRAY;
         }
         
@@ -64,6 +69,9 @@ public class CommentTranslationFoldingBuilder extends FoldingBuilderEx {
         List<FoldingDescriptor> descriptors = new ArrayList<>();
         
         try {
+            String filename = root.getContainingFile().getName();
+            LOG.info("Processing file: " + filename);
+            
             // 使用同步方法获取翻译数据
             TranslationService translationService = TranslationService.getInstance(root.getProject());
             List<TranslatedComment> translations = translationService.getTranslationsSync(
@@ -167,9 +175,14 @@ public class CommentTranslationFoldingBuilder extends FoldingBuilderEx {
     }
     
     /**
-     * 检查是否为 Go 文件
+     * 检查是否为支持的文件类型
+     * 当前支持：Go (.go), Rust (.rs)
      */
-    private boolean isGoFile(PsiElement root) {
-        return root.getContainingFile().getName().endsWith(".go");
+    private boolean isSupportedFile(PsiElement root) {
+        String filename = root.getContainingFile().getName();
+        if (filename == null) {
+            return false;
+        }
+        return filename.endsWith(".go") || filename.endsWith(".rs");
     }
 }

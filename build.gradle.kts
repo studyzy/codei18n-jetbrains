@@ -1,6 +1,6 @@
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version "1.17.4"
+    id("org.jetbrains.intellij.platform") version "2.2.1"
 }
 
 group = "com.github.studyzy"
@@ -8,41 +8,79 @@ version = "0.1.0"
 
 repositories {
     mavenCentral()
+    intellijPlatform {
+        defaultRepositories()
+    }
 }
+
+// Read properties
+val ideType = project.findProperty("intellij.type")?.toString() ?: "GO"
+val localIdePath = project.findProperty("intellij.localPath")?.toString()
 
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
     testImplementation("org.mockito:mockito-core:5.6.0")
+    
+    // IntelliJ Platform dependencies
+    intellijPlatform {
+        // Configure IDE based on type and local path
+        when {
+            localIdePath != null -> {
+                local(localIdePath)
+            }
+            ideType == "GO" -> {
+                goland("2023.3")
+            }
+            ideType == "RR" -> {
+                rustRover("2024.3")
+            }
+            else -> {
+                create("IC", "2023.3")
+            }
+        }
+        
+        // Configure bundled plugins based on IDE type - only when not using local path
+        if (localIdePath == null) {
+            when (ideType) {
+                "GO" -> bundledPlugin("org.jetbrains.plugins.go")
+                "RR" -> bundledPlugin("com.jetbrains.rust")
+                else -> {}
+            }
+        }
+        
+        pluginVerifier()
+    }
 }
 
-// Configure Gradle IntelliJ Plugin
-intellij {
-    version.set("2023.3")
-    type.set("GO") // GoLand
-    plugins.set(listOf("org.jetbrains.plugins.go"))
+intellijPlatform {
+    pluginConfiguration {
+        ideaVersion {
+            sinceBuild = "233"
+            untilBuild = "253.*"
+        }
+    }
+    
+    pluginVerification {
+        freeArgs = listOf("-mute", "TemplateWordInPluginId")
+    }
+    
+    signing {
+        certificateChain = providers.environmentVariable("CERTIFICATE_CHAIN")
+        privateKey = providers.environmentVariable("PRIVATE_KEY")
+        password = providers.environmentVariable("PRIVATE_KEY_PASSWORD")
+    }
+    
+    publishing {
+        token = providers.environmentVariable("PUBLISH_TOKEN")
+    }
 }
 
 tasks {
-    // Set the JVM compatibility versions
+    // Set the JVM compatibility versions - use 17 for compatibility
     withType<JavaCompile> {
         sourceCompatibility = "17"
         targetCompatibility = "17"
-    }
-
-    patchPluginXml {
-        sinceBuild.set("233")
-        untilBuild.set("243.*")
-    }
-
-    signPlugin {
-        certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
-        privateKey.set(System.getenv("PRIVATE_KEY"))
-        password.set(System.getenv("PRIVATE_KEY_PASSWORD"))
-    }
-
-    publishPlugin {
-        token.set(System.getenv("PUBLISH_TOKEN"))
     }
 
     test {

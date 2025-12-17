@@ -43,3 +43,4 @@ out/
 # Windows
 Thumbs.db
 .vscode/
+.intellijPlatform/

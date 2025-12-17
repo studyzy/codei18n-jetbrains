@@ -1,12 +1,13 @@
-.PHONY: build test run-ide clean help
+.PHONY: build test run-goland run-rustrover clean help
 
 help:
 	@echo "Available commands:"
-	@echo "  build    - Build the plugin"
-	@echo "  test     - Run tests"
-	@echo "  run-ide  - Run the plugin in a sandboxed IDE"
-	@echo "  release  - Build the plugin package for offline installation"
-	@echo "  clean    - Clean build artifacts"
+	@echo "  build        - Build the plugin"
+	@echo "  test         - Run tests"
+	@echo "  run-goland   - Run the plugin in a sandboxed GoLand IDE"
+	@echo "  run-rustrover - Run the plugin in a sandboxed RustRover IDE"
+	@echo "  release      - Build the plugin package for offline installation"
+	@echo "  clean        - Clean build artifacts"
 
 build:
 	./gradlew buildPlugin -x buildSearchableOptions
@@ -14,8 +15,11 @@ build:
 test:
 	./gradlew test
 
-run-ide:
-	./gradlew runIde
+run-goland:
+	./gradlew runIde -Pintellij.type=GO
+
+run-rustrover:
+	./gradlew runIde -Pintellij.type=RR
 
 release:
 	@echo "Building plugin package for offline installation..."

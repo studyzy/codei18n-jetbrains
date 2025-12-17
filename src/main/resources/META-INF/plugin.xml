@@ -5,13 +5,18 @@
 
     <description><![CDATA[
     Internationalization for code comments.<br>
-    Display translated comments in your IDE without modifying the source code.
+    Display translated comments in your IDE without modifying the source code.<br>
+    Supports: Go (.go), Rust (.rs)
     ]]></description>
 
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
          on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
-    <depends>org.jetbrains.plugins.go</depends>
+    <!-- Go 插件依赖设为可选，支持在 RustRover 中运行 -->
+    <depends optional="true" config-file="go-support.xml">org.jetbrains.plugins.go</depends>
+    <!-- Rust 插件依赖设为可选，支持在 GoLand 中运行 -->
+    <!-- RustRover 中 Rust 插件的 ID 是 com.jetbrains.rust -->
+    <depends optional="true" config-file="rust-support.xml">com.jetbrains.rust</depends>
 
     <projectListeners>
         <listener class="com.github.studyzy.codei18n.listeners.FileOpenListener"
@@ -25,30 +30,6 @@
             instance="com.github.studyzy.codei18n.settings.PluginSettingsConfigurable"
             id="com.github.studyzy.codei18n.settings.PluginSettingsConfigurable"
             displayName="CodeI18n"/>
-        
-        <!-- 注释翻译折叠构建器：折叠英文注释，显示中文翻译 -->
-        <lang.foldingBuilder
-            language="go"
-            implementationClass="com.github.studyzy.codei18n.providers.CommentTranslationFoldingBuilder"
-            order="first"/>
-        
-        <!-- 注释文档提供者：鼠标悬停时显示英文原文 -->
-        <lang.documentationProvider
-            language="go"
-            implementationClass="com.github.studyzy.codei18n.providers.CommentDocumentationProvider"
-            order="first"/>
-        
-        <!-- 注释翻译注解器（已禁用，改用 Folding 方式）
-        <annotator
-            language="go"
-            implementationClass="com.github.studyzy.codei18n.providers.CommentTranslationAnnotator"/>
-        -->
-        
-        <!-- Inlay Hints 方式（已禁用，改用 Folding 方式）
-        <codeInsight.inlayProvider
-            language="go"
-            implementationClass="com.github.studyzy.codei18n.providers.TranslationInlayHintsProvider"/>
-        -->
     </extensions>
 
     <actions>

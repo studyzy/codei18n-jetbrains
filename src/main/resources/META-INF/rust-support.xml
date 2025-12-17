@@ -1,0 +1,16 @@
+<idea-plugin>
+    <!-- Rust 语言支持配置 -->
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- 注释翻译折叠构建器：折叠英文注释，显示中文翻译 -->
+        <lang.foldingBuilder
+            language="Rust"
+            implementationClass="com.github.studyzy.codei18n.providers.CommentTranslationFoldingBuilder"
+            order="first"/>
+        
+        <!-- 注释文档提供者：鼠标悬停时显示英文原文 -->
+        <lang.documentationProvider
+            language="Rust"
+            implementationClass="com.github.studyzy.codei18n.providers.CommentDocumentationProvider"
+            order="first"/>
+    </extensions>
+</idea-plugin>
