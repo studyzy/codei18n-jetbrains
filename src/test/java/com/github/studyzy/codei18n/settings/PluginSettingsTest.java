@@ -9,7 +9,7 @@ public class PluginSettingsTest {
     public void testDefaults() {
         PluginSettings settings = new PluginSettings();
         assertTrue(settings.enabled);
-        assertEquals(DisplayMode.INLAY_HINT, settings.displayMode);
+        assertEquals(DisplayMode.FOLDING, settings.displayMode);
         assertEquals("codei18n", settings.cliConfiguration.getCliPath());
         assertEquals("zh-CN", settings.cliConfiguration.getTargetLanguage());
     }

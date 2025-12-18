@@ -43,7 +43,7 @@ public class CliServiceTest {
     @Test
     public void testExecuteCommandSuccess() throws ExecutionException {
         when(processExecutor.createCommandLine(any(), any(), any())).thenReturn(commandLine);
-        when(processExecutor.execute(any(), anyInt())).thenReturn(processOutput);
+        when(processExecutor.execute(any(), anyInt(), any())).thenReturn(processOutput);
         when(processOutput.isTimeout()).thenReturn(false);
         when(processOutput.getExitCode()).thenReturn(0);
         when(processOutput.getStdout()).thenReturn("success");
@@ -55,7 +55,7 @@ public class CliServiceTest {
     @Test
     public void testExecuteCommandTimeout() throws ExecutionException {
         when(processExecutor.createCommandLine(any(), any(), any())).thenReturn(commandLine);
-        when(processExecutor.execute(any(), anyInt())).thenReturn(processOutput);
+        when(processExecutor.execute(any(), anyInt(), any())).thenReturn(processOutput);
         when(processOutput.isTimeout()).thenReturn(true);
 
         String result = cliService.executeCommand("codei18n", List.of("version"), null, 5000);
