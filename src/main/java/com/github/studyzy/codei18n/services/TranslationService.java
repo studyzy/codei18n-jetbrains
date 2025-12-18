@@ -187,6 +187,11 @@ public final class TranslationService implements Disposable {
                         int startOffset = document.getLineStartOffset(startLine) + startCol;
                         int endOffset = document.getLineStartOffset(endLine) + endCol;
                         
+                        LOG.warn("[DEBUG] Translation for " + relativePath + " at line " + (startLine + 1) + 
+                                ": offset=" + startOffset + "-" + endOffset + 
+                                ", sourceText=" + data.sourceText().substring(0, Math.min(50, data.sourceText().length())) +
+                                ", translation=" + data.getTranslation().substring(0, Math.min(50, data.getTranslation().length())));
+                        
                         TranslatedComment comment = new TranslatedComment(
                             data.id(),
                             data.sourceText(),
@@ -197,13 +202,14 @@ public final class TranslationService implements Disposable {
                             TranslatedComment.CommentType.LINE,
                             data.symbol()
                         );
+                        LOG.warn("Created TranslatedComment: id=" + comment.commentId() + ", translation=" + comment.translation());
                         translations.add(comment);
                     }
                 }
             }
         }
         
-        LOG.info("Fetched " + translations.size() + " translations for file: " + relativePath);
+        LOG.warn("Fetched " + translations.size() + " translations for file: " + relativePath);
         return translations;
     }
 

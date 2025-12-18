@@ -10,6 +10,7 @@ import com.intellij.lang.folding.FoldingDescriptor;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.FoldingGroup;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiRecursiveElementVisitor;
@@ -93,31 +94,92 @@ public class CommentTranslationFoldingBuilder extends FoldingBuilderEx {
                 public void visitComment(@NotNull PsiComment comment) {
                     super.visitComment(comment);
                     
-                    int startOffset = comment.getTextRange().getStartOffset();
+                    String commentText = comment.getText();
+                    int commentStartOffset = comment.getTextRange().getStartOffset();
                     
+                    // 检查是否为Rust文件的连续单行注释（可能被PSI合并成一个PsiComment）
+                    // 对于Rust文件，我们需要将每一行注释单独处理
+                    boolean isRustFile = filename.endsWith(".rs");
+                    boolean isMultiLineComment = commentText.contains("\n");
+                    boolean isSingleLineCommentStyle = commentText.trim().startsWith("//");
+                    
+                    if (isRustFile && isMultiLineComment && isSingleLineCommentStyle) {
+                        // 拆分成多行，逐行处理
+                        String[] lines = commentText.split("\n");
+                        int currentOffset = commentStartOffset;
+                        
+                        for (String line : lines) {
+                            if (line.trim().isEmpty()) {
+                                currentOffset += line.length() + 1; // +1 for \n
+                                continue;
+                            }
+                            
+                            int lineNumber = document.getLineNumber(currentOffset) + 1; // 1-based
+                            String trimmedLine = line.trim();
+                            
+                            // 为每一行查找匹配的翻译
+                            processCommentLine(currentOffset, lineNumber, trimmedLine, line, descriptors, translations, comment);
+                            
+                            currentOffset += line.length() + 1; // +1 for \n
+                        }
+                    } else {
+                        // 单行注释或块注释，直接处理
+                        int startOffset = commentStartOffset;
+                        int lineNumber = document.getLineNumber(startOffset) + 1; // 1-based line number
+                        String trimmedComment = commentText.trim();
+                        
+                        processCommentLine(startOffset, lineNumber, trimmedComment, commentText, descriptors, translations, comment);
+                    }
+                }
+                
+                private void processCommentLine(int startOffset, int lineNumber, String trimmedText, 
+                                               String originalText, List<FoldingDescriptor> descriptors, 
+                                               List<TranslatedComment> translations, PsiComment comment) {
                     // 查找匹配的翻译
+                    // 优先使用 offset 匹配（精确匹配），如果失败则使用行号和文本内容匹配
                     for (TranslatedComment translatedComment : translations) {
+                        boolean matched = false;
+                        
+                        // 方法1: 精确 offset 匹配（适用于无缩进的注释）
                         if (translatedComment.startOffset() == startOffset) {
+                            matched = true;
+                        }
+                        // 方法2: 行号匹配 + 文本内容匹配（适用于有缩进的注释）
+                        else if (translatedComment.lineNumber() == lineNumber) {
+                            // 比较注释的实际内容（去除空格和注释符号）
+                            String translatedSourceText = translatedComment.sourceText().trim();
+                            if (trimmedText.equals(translatedSourceText)) {
+                                matched = true;
+                                LOG.info("Matched comment by line number and content: line " + lineNumber + 
+                                        ", offset " + startOffset + " vs " + translatedComment.startOffset());
+                            }
+                        }
+                        
+                        if (matched) {
                             String translation = translatedComment.translation();
                             
                             if (translation != null && !translation.isEmpty()) {
                                 // 格式化翻译文本（保留注释符号）
-                                String placeholderText = formatTranslation(comment.getText(), translation);
+                                String placeholderText = formatTranslation(originalText, translation);
                                 
                                 // 缓存翻译结果
                                 translationCache.put(startOffset, placeholderText);
                                 
                                 // 创建折叠描述符
+                                // 计算这一行注释的结束offset
+                                int endOffset = startOffset + originalText.length();
+                                TextRange textRange = new TextRange(startOffset, endOffset);
+                                
                                 FoldingDescriptor descriptor = new FoldingDescriptor(
                                     comment.getNode(),
-                                    comment.getTextRange(),
+                                    textRange,
                                     TRANSLATION_GROUP,
                                     placeholderText
                                 );
                                 descriptors.add(descriptor);
                                 
-                                LOG.info("Added fold region for comment at offset " + startOffset + 
-                                        ": " + placeholderText);
+                                LOG.info("Added fold region for comment at line " + lineNumber + 
+                                        ", offset " + startOffset + "-" + endOffset + ": " + placeholderText);
                             }
                             break;
                         }
