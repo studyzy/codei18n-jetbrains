@@ -1,0 +1,19 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Java support -->
+        <lang.foldingBuilder language="JAVA" implementationClass="com.github.studyzy.codei18n.providers.CommentTranslationFoldingBuilder"/>
+        <lang.documentationProvider language="JAVA" implementationClass="com.github.studyzy.codei18n.providers.CommentDocumentationProvider" order="first"/>
+
+        <!-- Kotlin support -->
+        <lang.foldingBuilder language="kotlin" implementationClass="com.github.studyzy.codei18n.providers.CommentTranslationFoldingBuilder"/>
+        <lang.documentationProvider language="kotlin" implementationClass="com.github.studyzy.codei18n.providers.CommentDocumentationProvider" order="first"/>
+
+        <!-- Scala support -->
+        <lang.foldingBuilder language="Scala" implementationClass="com.github.studyzy.codei18n.providers.CommentTranslationFoldingBuilder"/>
+        <lang.documentationProvider language="Scala" implementationClass="com.github.studyzy.codei18n.providers.CommentDocumentationProvider" order="first"/>
+
+        <!-- Groovy support -->
+        <lang.foldingBuilder language="Groovy" implementationClass="com.github.studyzy.codei18n.providers.CommentTranslationFoldingBuilder"/>
+        <lang.documentationProvider language="Groovy" implementationClass="com.github.studyzy.codei18n.providers.CommentDocumentationProvider" order="first"/>
+    </extensions>
+</idea-plugin>

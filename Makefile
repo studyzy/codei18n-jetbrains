@@ -1,4 +1,4 @@
-.PHONY: build test run-goland run-rustrover build-local clean help
+.PHONY: build test run-goland run-rustrover run-intellij build-local clean help
 
 help:
 	@echo "Available commands:"
@@ -7,6 +7,7 @@ help:
 	@echo "  test           - Run tests"
 	@echo "  run-goland     - Run the plugin in GoLand IDE"
 	@echo "  run-rustrover  - Run the plugin in RustRover IDE"
+	@echo "  run-intellij   - Run the plugin in IntelliJ IDEA Community IDE"
 	@echo "  release        - Build the plugin package for offline installation"
 	@echo "  clean          - Clean build artifacts"
 
@@ -24,6 +25,9 @@ run-goland:
 
 run-rustrover:
 	./gradlew runIde -Pintellij.type=RR
+
+run-intellij:
+	./gradlew runIde -Pintellij.type=IC
 
 release:
 	@echo "Building plugin package for offline installation..."

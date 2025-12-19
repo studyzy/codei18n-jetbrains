@@ -42,6 +42,9 @@ dependencies {
             ideType == "RR" -> {
                 rustRover("2024.3")
             }
+            ideType == "IC" -> {
+                intellijIdeaCommunity("2024.3")
+            }
             else -> {
                 create("IC", "2024.3")
             }
@@ -57,6 +60,10 @@ dependencies {
                 "RR" -> {
                     bundledPlugin("com.jetbrains.rust")
                     bundledPlugin("JavaScript")
+                }
+                "IC" -> {
+                    bundledPlugin("com.intellij.java")
+                    // Note: JavaScript plugin is not available in IntelliJ IDEA Community
                 }
                 else -> {}
             }

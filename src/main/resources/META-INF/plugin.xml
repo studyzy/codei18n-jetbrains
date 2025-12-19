@@ -19,6 +19,8 @@
     <depends optional="true" config-file="rust-support.xml">com.jetbrains.rust</depends>
     <!-- JavaScript 插件依赖设为可选 -->
     <depends optional="true" config-file="javascript-support.xml">JavaScript</depends>
+    <!-- Java 插件依赖设为可选 -->
+    <depends optional="true" config-file="java-support.xml">com.intellij.modules.java</depends>
 
     <projectListeners>
         <listener class="com.github.studyzy.codei18n.listeners.FileOpenListener"
@@ -32,6 +34,9 @@
             instance="com.github.studyzy.codei18n.settings.PluginSettingsConfigurable"
             id="com.github.studyzy.codei18n.settings.PluginSettingsConfigurable"
             displayName="CodeI18n"/>
+
+        <!-- Fallback folding builder for Text files (handles files not recognized by specific language plugins) -->
+        <lang.foldingBuilder language="TEXT" implementationClass="com.github.studyzy.codei18n.providers.CommentTranslationFoldingBuilder"/>
     </extensions>
 
     <actions>

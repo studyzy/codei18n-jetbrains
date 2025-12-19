@@ -25,8 +25,8 @@ import java.awt.*;
 import java.util.List;
 
 /**
- * 翻译 Inlay Hints 提供者
- * 在注释位置显示中文翻译，隐藏英文原文
+ * Inlay Hints Provider for Translation
+ * Displays Chinese translation at comment positions and hides the original English text
  */
 @SuppressWarnings("UnstableApiUsage")
 public class TranslationInlayHintsProvider implements InlayHintsProvider<NoSettings> {
@@ -87,7 +87,7 @@ public class TranslationInlayHintsProvider implements InlayHintsProvider<NoSetti
     }
     
     /**
-     * Inlay Hints 收集器
+     * Inlay Hints Collector
      */
     private static class TranslationInlayCollector extends FactoryInlayHintsCollector {
         
@@ -102,18 +102,18 @@ public class TranslationInlayHintsProvider implements InlayHintsProvider<NoSetti
         
         @Override
         public boolean collect(@NotNull PsiElement element, @NotNull Editor editor, @NotNull InlayHintsSink sink) {
-            // 如果插件未启用，不收集
+            // If the plugin is not enabled, do not collect
             if (!PluginSettings.getInstance().enabled) {
                 return true;
             }
             
-            // 只处理支持的文件类型
+            // Only process supported file types
             if (!FileUtils.isSupportedFile(file.getName())) {
                 return true;
             }
             
             try {
-                // 获取翻译数据
+                // Get translation data
                 TranslationService translationService = TranslationService.getInstance(file.getProject());
                 List<TranslatedComment> translations = translationService.getTranslations(file, false);
                 
@@ -123,7 +123,7 @@ public class TranslationInlayHintsProvider implements InlayHintsProvider<NoSetti
                 
                 LOG.info("Collecting inlay hints for " + file.getName() + ", got " + translations.size() + " translations");
                 
-                // 遍历所有注释
+                // Iterate through all comments
                 element.accept(new PsiRecursiveElementVisitor() {
                     @Override
                     public void visitComment(@NotNull PsiComment comment) {
@@ -131,22 +131,22 @@ public class TranslationInlayHintsProvider implements InlayHintsProvider<NoSetti
                         
                         int startOffset = comment.getTextRange().getStartOffset();
                         
-                        // 查找匹配的翻译
+                        // Find matching translation
                         for (TranslatedComment translatedComment : translations) {
                             if (translatedComment.startOffset() == startOffset) {
                                 String translation = translatedComment.translation();
                                 
                                 if (translation != null && !translation.isEmpty()) {
-                                    // 格式化翻译文本（保留注释符号）
+                                    // Format translation text (preserve comment symbols)
                                     String displayText = formatTranslation(comment.getText(), translation);
                                     
-                                    // 创建翻译显示
+                                    // Create translation display
                                     InlayPresentation presentation = createTranslationPresentation(
                                         displayText,
                                         comment.getText()
                                     );
                                     
-                                    // 在注释开始位置添加 inline inlay
+                                    // Add inline inlay at the beginning of the comment
                                     sink.addInlineElement(
                                         startOffset,
                                         false, // relatesToPrecedingText
@@ -170,25 +170,25 @@ public class TranslationInlayHintsProvider implements InlayHintsProvider<NoSetti
         }
         
         /**
-         * 创建翻译显示
+         * Create translation display
          */
         private InlayPresentation createTranslationPresentation(String translation, String originalText) {
             PresentationFactory factory = getFactory();
             
-            // 创建中文翻译文本
+            // Create Chinese translation text
             InlayPresentation textPresentation = factory.text(translation);
             
-            // 添加工具提示（显示英文原文）
+            // Add tooltip (display original English text)
             InlayPresentation withTooltip = factory.withTooltip(
                 "英文原文: " + originalText,
                 textPresentation
             );
             
-            // 添加点击事件（可选：点击切换显示）
+            // Add click event (optional: toggle display on click)
             InlayPresentation clickable = factory.referenceOnHover(
                 withTooltip,
                 (event, translated) -> {
-                    // 可以在这里添加点击切换逻辑
+                    // Click toggle logic can be added here
                 }
             );
             
@@ -196,8 +196,8 @@ public class TranslationInlayHintsProvider implements InlayHintsProvider<NoSetti
         }
         
         /**
-         * 格式化翻译文本，保留注释符号
-         */
+     * Format translation text while preserving comment symbols
+     */
         private String formatTranslation(String originalComment, String translation) {
             if (originalComment.startsWith("///")) {
                 return "/// " + translation;

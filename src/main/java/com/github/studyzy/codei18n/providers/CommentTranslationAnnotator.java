@@ -21,8 +21,8 @@ import java.awt.*;
 import java.util.List;
 
 /**
- * 注释翻译注解器
- * 显示中文翻译，隐藏英文原文
+ * Comment translation annotator
+ * Displays Chinese translation, hides English original
  */
 public class CommentTranslationAnnotator implements Annotator {
     
@@ -30,17 +30,17 @@ public class CommentTranslationAnnotator implements Annotator {
     
     @Override
     public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
-        // 只处理注释元素
+        // Only process comment elements
         if (!(element instanceof PsiComment)) {
             return;
         }
         
-        // 如果插件未启用，不处理
+        // If the plugin is not enabled, do not process
         if (!PluginSettings.getInstance().enabled) {
             return;
         }
         
-        // 只处理支持的文件类型
+        // Only process supported file types
         if (!FileUtils.isSupportedFile(element.getContainingFile().getName())) {
             return;
         }
@@ -48,7 +48,7 @@ public class CommentTranslationAnnotator implements Annotator {
         PsiComment comment = (PsiComment) element;
         
         try {
-            // 获取翻译数据
+            // Get translation data
             TranslationService translationService = TranslationService.getInstance(element.getProject());
             List<TranslatedComment> translations = translationService.getTranslations(
                 element.getContainingFile(),
@@ -57,24 +57,24 @@ public class CommentTranslationAnnotator implements Annotator {
             
             int startOffset = comment.getTextRange().getStartOffset();
             
-            // 查找匹配的翻译
+            // Find matching translation
             for (TranslatedComment translatedComment : translations) {
                 if (translatedComment.startOffset() == startOffset) {
                     String translation = translatedComment.translation();
                     
                     if (translation != null && !translation.isEmpty()) {
-                        // 格式化翻译文本
+                        // Format the translated text
                         String displayText = formatTranslation(comment.getText(), translation);
                         
-                        // 创建注释样式的文本属性
+                        // Create text attributes for comment style
                         TextAttributes attributes = new TextAttributes();
                         attributes.setForegroundColor(new JBColor(
-                            new Color(128, 128, 128),  // 灰色（Light 主题）
-                            new Color(128, 128, 128)   // 灰色（Dark 主题）
+                            new Color(128, 128, 128),  // Gray (Light theme)
+                            new Color(128, 128, 128)   // Gray (Dark theme)
                         ));
                         attributes.setFontType(Font.ITALIC);
                         
-                        // 创建信息注解，显示中文翻译
+                        // Create info annotation, display Chinese translation
                         holder.newAnnotation(HighlightSeverity.INFORMATION, displayText)
                             .range(comment.getTextRange())
                             .enforcedTextAttributes(attributes)
@@ -93,8 +93,8 @@ public class CommentTranslationAnnotator implements Annotator {
     }
     
     /**
-     * 格式化翻译文本，保留注释符号
-     */
+         * Format translation text while preserving comment symbols
+         */
     private String formatTranslation(String originalComment, String translation) {
         if (originalComment.startsWith("///")) {
             return "/// " + translation;

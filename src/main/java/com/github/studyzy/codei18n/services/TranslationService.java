@@ -58,10 +58,10 @@ public final class TranslationService implements Disposable {
     }
 
     /**
-     * 获取翻译数据
-     * @param file 文件
-     * @param forceRefresh 是否强制刷新
-     * @return 翻译列表
+     * Get translation data
+     * @param file File
+     * @param forceRefresh Whether to force refresh
+     * @return Translation list
      */
     public List<TranslatedComment> getTranslations(PsiFile file, boolean forceRefresh) {
         String relativePath = getRelativePath(file);
@@ -70,32 +70,32 @@ public final class TranslationService implements Disposable {
             return cache.get(relativePath);
         }
         
-        // 如果缓存中没有，触发后台刷新并返回空列表
-        // FoldingBuilder 会在数据准备好后通过 updateFolding 被重新触发
+        // If not in cache, trigger background refresh and return empty list
+        // FoldingBuilder will be re-triggered via updateFolding after the data is ready
         scheduleRefresh(file, relativePath);
         
         return cache.getOrDefault(relativePath, Collections.emptyList());
     }
     
     /**
-     * 同步获取翻译数据（带超时），用于 FoldingBuilder
-     * @param file 文件
-     * @param timeoutMs 超时时间（毫秒）
-     * @return 翻译列表
+     * Synchronously fetches translation data (with timeout), used for FoldingBuilder
+     * @param file The file
+     * @param timeoutMs Timeout duration (milliseconds)
+     * @return Translation list
      */
     public List<TranslatedComment> getTranslationsSync(PsiFile file, long timeoutMs) {
         String relativePath = getRelativePath(file);
         
-        // 如果缓存中有数据，直接返回
+        // If data exists in the cache, return it directly
         if (cache.containsKey(relativePath)) {
             return cache.get(relativePath);
         }
         
-        // 没有缓存，需要同步获取
+        // No cache available, need to fetch synchronously
         final String content = file.getText();
         
         try {
-            // 在后台线程同步执行（避免在ReadAction内直接运行外部进程）
+            // Execute synchronously in a background thread (avoid running external processes directly within ReadAction)
             List<TranslatedComment> result = fetchTranslationsSync(file, relativePath, content, timeoutMs);
             if (result != null && !result.isEmpty()) {
                 cache.put(relativePath, result);
@@ -105,13 +105,13 @@ public final class TranslationService implements Disposable {
             LOG.warn("Failed to fetch translations synchronously", e);
         }
         
-        // 如果同步获取失败，触发异步刷新
+        // If synchronous acquisition fails, trigger asynchronous refresh
         scheduleRefresh(file, relativePath);
         return Collections.emptyList();
     }
     
     /**
-     * 同步获取翻译数据（直接调用 CLI），在后台线程运行以避免 ReadAction/EDT 阻塞
+     * Synchronously fetch translation data (directly calling CLI), running in a background thread to avoid ReadAction/EDT blocking
      */
     private List<TranslatedComment> fetchTranslationsSync(PsiFile file, String relativePath, String content, long timeoutMs) {
         CliService cliService = CliService.getInstance(project);
@@ -228,10 +228,10 @@ public final class TranslationService implements Disposable {
                 // Refresh UI on EDT
                 ApplicationManager.getApplication().invokeLater(() -> {
                     if (!project.isDisposed() && file.isValid()) {
-                        // 触发代码分析器重新分析
+                        // Trigger the code analyzer to re-analyze
                         DaemonCodeAnalyzer.getInstance(project).restart(file);
                         
-                        // 触发代码折叠更新
+                        // Trigger code folding update
                         updateFolding(file);
                     }
                 });
@@ -240,21 +240,21 @@ public final class TranslationService implements Disposable {
     }
     
     /**
-     * 更新文件的代码折叠
+     * Update code folding for the file
      */
     private void updateFolding(PsiFile file) {
         if (file == null || !file.isValid() || file.getVirtualFile() == null) {
             return;
         }
         
-        // 获取文件对应的编辑器
+        // Get the editor corresponding to the file
         FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
         FileEditor[] editors = fileEditorManager.getEditors(file.getVirtualFile());
         
         for (FileEditor fileEditor : editors) {
             if (fileEditor instanceof TextEditor) {
                 Editor editor = ((TextEditor) fileEditor).getEditor();
-                // 触发折叠区域更新
+                // Trigger collapse area update
                 CodeFoldingManager.getInstance(project).updateFoldRegions(editor);
             }
         }

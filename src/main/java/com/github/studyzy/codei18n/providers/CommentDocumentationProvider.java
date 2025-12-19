@@ -14,32 +14,32 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 /**
- * 注释文档提供者
- * 在鼠标悬停在翻译后的注释上时，显示英文原文
+ * Comment Documentation Provider
+ * Displays the original English text when hovering over translated comments
  */
 public class CommentDocumentationProvider extends AbstractDocumentationProvider {
     
     @Override
     public @Nullable String generateDoc(PsiElement element, @Nullable PsiElement originalElement) {
-        // 如果插件未启用，返回 null
+        // If the plugin is not enabled, return null
         if (!PluginSettings.getInstance().enabled) {
             return null;
         }
         
-        // 检查是否为注释
+        // Check if it is a comment
         if (element instanceof PsiComment) {
             PsiComment comment = (PsiComment) element;
             
-            // 尝试从翻译服务获取原始英文注释
+            // Attempt to retrieve the original English comment from the translation service
             String originalText = getOriginalText(comment);
             
             if (originalText != null && !originalText.isEmpty()) {
                 String cleanText = cleanCommentText(originalText);
-                // 返回格式化的文档
+                // Returns formatted documentation
                 return formatDocumentation("英文原文", cleanText);
             }
             
-            // 如果没有翻译数据，直接显示注释原文
+            // If there is no translation data, directly display the original comment text
             String commentText = comment.getText();
             String cleanText = cleanCommentText(commentText);
             return formatDocumentation("注释内容", cleanText);
@@ -49,7 +49,7 @@ public class CommentDocumentationProvider extends AbstractDocumentationProvider 
     }
     
     /**
-     * 获取注释的原始英文文本
+     * Get the original English text of the comment
      */
     private String getOriginalText(PsiComment comment) {
         try {
@@ -63,17 +63,17 @@ public class CommentDocumentationProvider extends AbstractDocumentationProvider 
             
             for (TranslatedComment translatedComment : translations) {
                 if (translatedComment.startOffset() == startOffset) {
-                    // 返回存储的源文本(英文原文)
+                    // Returns the stored source text (English original)
                     String sourceText = translatedComment.sourceText();
                     if (sourceText != null && !sourceText.isEmpty()) {
                         return sourceText;
                     }
-                    // 如果sourceText为空,返回注释本身的文本
+                    // If sourceText is empty, return the text of the comment itself
                     return comment.getText();
                 }
             }
         } catch (Exception e) {
-            // 忽略错误,返回注释本身的文本作为后备
+            // Ignore errors, return the comment's own text as fallback
             return comment.getText();
         }
         
@@ -87,12 +87,12 @@ public class CommentDocumentationProvider extends AbstractDocumentationProvider 
             @Nullable PsiElement contextElement,
             int targetOffset
     ) {
-        // 如果光标在注释上，返回注释元素
+        // If the cursor is on a comment, return the comment element
         if (contextElement instanceof PsiComment) {
             return contextElement;
         }
         
-        // 检查父元素是否为注释
+        // Check if the parent element is a comment
         PsiElement parent = contextElement != null ? contextElement.getParent() : null;
         if (parent instanceof PsiComment) {
             return parent;
@@ -102,7 +102,7 @@ public class CommentDocumentationProvider extends AbstractDocumentationProvider 
     }
     
     /**
-     * 清理注释文本，移除注释符号
+     * Cleans comment text, removes comment symbols
      */
     private String cleanCommentText(String commentText) {
         if (commentText.startsWith("//")) {
@@ -114,7 +114,7 @@ public class CommentDocumentationProvider extends AbstractDocumentationProvider 
     }
     
     /**
-     * 格式化文档内容为 HTML
+     * Format document content as HTML
      */
     private String formatDocumentation(String title, String content) {
         return "<html><body>" +
@@ -128,7 +128,7 @@ public class CommentDocumentationProvider extends AbstractDocumentationProvider 
     }
     
     /**
-     * HTML 转义
+     * HTML escape
      */
     private String escapeHtml(String text) {
         return text.replace("&", "&amp;")

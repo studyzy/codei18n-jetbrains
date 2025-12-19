@@ -14,34 +14,53 @@ import com.intellij.openapi.fileEditor.TextEditor;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
 import com.intellij.util.Alarm;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * 文件编辑器监听器
- * 在 Go 文件打开时，自动折叠翻译注释
+ * File Editor Listener
+ * Automatically folds translation comments when Go files are opened
  */
 public class FileOpenListener implements FileEditorManagerListener {
     
     private static final Logger LOG = Logger.getInstance(FileOpenListener.class);
     
-    // 使用静态 Alarm，因为监听器可能被多次实例化
+    // Use static Alarm because the listener may be instantiated multiple times
     private static final Alarm alarm = new Alarm(Alarm.ThreadToUse.SWING_THREAD);
     
     public FileOpenListener() {
-        // 无参构造函数，供 plugin.xml 注册使用
+        // Parameterless constructor, for plugin.xml registration
     }
     
     @Override
     public void fileOpened(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
-        // 只处理支持的文件类型
-        if (!FileUtils.isSupportedFile(file.getName())) {
+        LOG.info("[DEBUG] FileOpenListener.fileOpened called for: " + file.getName());
+        
+        // Print file type and language information
+        FileEditor[] editors = source.getEditors(file);
+        if (editors.length > 0 && editors[0] instanceof TextEditor) {
+            TextEditor textEditor = (TextEditor) editors[0];
+            PsiFile psiFile = PsiManager.getInstance(source.getProject()).findFile(file);
+            if (psiFile != null) {
+                LOG.info("[DEBUG] File language ID: " + psiFile.getLanguage().getID());
+                LOG.info("[DEBUG] File language display name: " + psiFile.getLanguage().getDisplayName());
+            }
+        }
+        
+        // Only process supported file types
+        boolean isSupported = FileUtils.isSupportedFile(file.getName());
+        LOG.info("[DEBUG] isSupportedFile: " + isSupported);
+        
+        if (!isSupported) {
             return;
         }
         
         PluginSettings settings = PluginSettings.getInstance();
+        LOG.info("[DEBUG] Settings - enabled: " + settings.enabled + ", displayMode: " + settings.displayMode);
         
-        // 检查插件是否启用以及是否为 FOLDING 模式
+        // Check if the plugin is enabled and if it is in FOLDING mode
         if (!settings.enabled || settings.displayMode != DisplayMode.FOLDING) {
             return;
         }
@@ -50,13 +69,13 @@ public class FileOpenListener implements FileEditorManagerListener {
         
         Project project = source.getProject();
         
-        // 延迟执行折叠操作，等待 FoldingBuilder 完成构建折叠区域
-        // 需要多次延迟尝试，因为翻译数据可能需要时间获取
+        // Delay the folding operation to wait for FoldingBuilder to complete constructing the folding regions
+        // Multiple delayed attempts are needed because translation data may require time to fetch
         scheduleCollapseWithRetry(source, file, project, 0);
     }
     
     /**
-     * 带重试的折叠操作
+     * Fold operation with retry
      */
     private void scheduleCollapseWithRetry(FileEditorManager manager, VirtualFile file, Project project, int attempt) {
         if (attempt >= 5) {
@@ -64,7 +83,7 @@ public class FileOpenListener implements FileEditorManagerListener {
             return;
         }
         
-        int delay = attempt == 0 ? 500 : 1000; // 首次500ms，后续1000ms
+        int delay = attempt == 0 ? 500 : 1000; // First time 500ms, subsequent times 1000ms
         
         alarm.addRequest(() -> {
             if (project.isDisposed()) {
@@ -73,7 +92,7 @@ public class FileOpenListener implements FileEditorManagerListener {
             
             int collapsedCount = collapseTranslationFolds(manager, file);
             
-            // 如果没有折叠到任何区域，可能是翻译数据还没准备好，重试
+            // If not collapsed into any region, it may be that the translation data is not ready yet, retry
             if (collapsedCount == 0 && attempt < 4) {
                 LOG.info("No fold regions found yet, retrying... attempt=" + (attempt + 1));
                 scheduleCollapseWithRetry(manager, file, project, attempt + 1);
@@ -82,8 +101,8 @@ public class FileOpenListener implements FileEditorManagerListener {
     }
     
     /**
-     * 折叠翻译注释
-     * @return 折叠的区域数量
+     * Collapse translation comment
+     * @return Number of collapsed regions
      */
     private int collapseTranslationFolds(FileEditorManager manager, VirtualFile file) {
         FileEditor[] editors = manager.getEditors(file);
@@ -96,13 +115,13 @@ public class FileOpenListener implements FileEditorManagerListener {
                 
                 final int[] collapsedCount = {0};
                 
-                // 在折叠批处理中执行
+                // Execute in the folding batch
                 foldingModel.runBatchFoldingOperation(() -> {
                     FoldRegion[] regions = foldingModel.getAllFoldRegions();
                     
                     for (FoldRegion region : regions) {
-                        // 检查是否为翻译折叠区域
-                        // 翻译后的注释通常以 "// " 开头且包含中文或其他翻译内容
+                        // Check if it is a translation folding region
+                        // Translated comments typically start with "// " and contain Chinese or other translated content
                         String placeholder = region.getPlaceholderText();
                         if (isTranslationPlaceholder(placeholder)) {
                             if (region.isExpanded()) {
@@ -122,24 +141,24 @@ public class FileOpenListener implements FileEditorManagerListener {
     }
     
     /**
-     * 判断是否为翻译占位符
+     * Determines if it is a translation placeholder
      */
     private boolean isTranslationPlaceholder(String placeholder) {
         if (placeholder == null || placeholder.isEmpty()) {
             return false;
         }
         
-        // 排除常见的非翻译占位符
+        // Exclude common non-translation placeholders
         if (placeholder.equals("...") || placeholder.equals("// ...") || placeholder.equals("/* ... */")) {
             return false;
         }
         
-        // 检查是否为注释格式
+        // Check if it is in comment format
         if (placeholder.startsWith("// ") || placeholder.startsWith("/* ")) {
-            // 检查是否包含非 ASCII 字符（中文等）
+            // Check if it contains non-ASCII characters (such as Chinese, etc.)
             for (char c : placeholder.toCharArray()) {
                 if (c > 127) {
-                    return true; // 包含中文或其他非 ASCII 字符
+                    return true; // Contains Chinese or other non-ASCII characters
                 }
             }
         }

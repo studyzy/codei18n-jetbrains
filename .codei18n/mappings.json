@@ -3,65 +3,73 @@
   "sourceLanguage": "en",
   "targetLanguage": "zh-CN",
   "comments": {
-    "0357306d5f33d478ea713d57bd544399cca96668": {
-      "en": "// Returns the stored source text (English original)",
-      "zh-CN": "// 返回存储的源文本(英文原文)"
+    "02dedbbd02b9e9190948a3a6a9280702ada883c0": {
+      "en": "/**\n     * Format document content as HTML\n     */",
+      "zh-CN": "/**\n     * 格式化文档内容为 HTML\n     */"
+    },
+    "070b4e8978ec29b091ec04e1028155a4b02d8f47": {
+      "en": "// Check if the plugin is enabled and if it is in FOLDING mode",
+      "zh-CN": "// 检查插件是否启用以及是否为 FOLDING 模式"
+    },
+    "0736bdd3f0c03caf25ffacca09acc410b4f19c84": {
+      "en": "// Go",
+      "zh-CN": "// 围棋"
     },
     "08dec96016c7107d8d321f62f5f1b59f1ab53aa4": {
       "en": "/**\n     * Check if it is a supported file type\n     * Currently supported: Go (.go), Rust (.rs)\n     */",
       "zh-CN": "/**\n     * 检查是否为支持的文件类型\n     * 当前支持：Go (.go), Rust (.rs)\n     */"
     },
-    "0d13efddae527e66af88bc2d392a603078e92b8d": {
-      "en": "/**\n     * Format translation text while preserving comment symbols\n     */",
-      "zh-CN": "/**\n     * 格式化翻译文本，保留注释符号\n     */"
+    "0c9e542c29e3ce504b03de460b97812efdc84b4e": {
+      "en": "// Create info annotation, display Chinese translation",
+      "zh-CN": "// 创建信息注解，显示中文翻译"
     },
-    "0eb7be7e740fb96d92f765d93776ee743ace64c1": {
-      "en": "// Add tooltip (display original English text)",
-      "zh-CN": "// 添加工具提示（显示英文原文）"
+    "0eb0beedfb9074528c8a6605839adda0c86d3849": {
+      "en": "// Collapsed display (English comments are collapsed and displayed as Chinese translation, click to expand to view the original)",
+      "zh-CN": "// 折叠显示 (英文注释折叠显示为中文翻译，点击展开查看原文)"
     },
-    "126c2ee017afc64232af1f8298f28f8f7a52817c": {
-      "en": "// Check if the translation is already in block comment format",
-      "zh-CN": "// 检查翻译是否已经是块注释格式"
+    "12491aa1ad835548742f5e2078a87e282199b6a5": {
+      "en": "// First time 500ms, subsequent times 1000ms",
+      "zh-CN": "// 首次500ms，后续1000ms"
     },
-    "1373306e7e7fb9a23e5f5151a7f0bf3b7ebf90ed": {
-      "en": "// Method 1: Exact offset matching (suitable for comments without indentation)",
-      "zh-CN": "// 方法1: 精确 offset 匹配（适用于无缩进的注释）"
+    "128728b9c683be970a7a5042b0fff511b4d9472f": {
+      "en": "// Create Chinese translation text",
+      "zh-CN": "// 创建中文翻译文本"
     },
-    "1770cda047fb06b66fc9eeef887287809abd6c4f": {
-      "en": "// Multiple delayed attempts are needed because translation data may require time to fetch",
-      "zh-CN": "// 需要多次延迟尝试，因为翻译数据可能需要时间获取"
+    "1294dbe2c51aca159bf6cb1c4003fa1ffbfdd67e": {
+      "en": "// JSDoc",
+      "zh-CN": "// JSDoc"
     },
-    "18dcc096e84d5492c8d3b6f9819f66f909ab2fb1": {
-      "en": "/**\n     * Synchronously fetch translation data (directly calling CLI), running in a background thread to avoid ReadAction/EDT blocking\n     */",
-      "zh-CN": "/**\n     * 同步获取翻译数据（直接调用 CLI），在后台线程运行以避免 ReadAction/EDT 阻塞\n     */"
+    "14204e71ad726f869feb619028052a862305eb2c": {
+      "en": "// Trigger code folding update",
+      "zh-CN": "// 触发代码折叠更新"
     },
-    "1a8cd9bab8893fab9bc88fa60d7a530b13997446": {
+    "19615eb0ebd7ec0c61b78875d93cac2f82351e31": {
+      "en": "// No cache available, need to fetch synchronously",
+      "zh-CN": "// 没有缓存，需要同步获取"
+    },
+    "1a15b19c1183d74b1d2a14e9b29e5c9470c5d2bc": {
+      "en": "// Using synchronous method to fetch translation data",
+      "zh-CN": "// 使用同步方法获取翻译数据"
+    },
+    "1a862333aa2c59a0d4106cfedd9134f5134c154a": {
+      "en": "// The field name returned by CLI is localizedText",
+      "zh-CN": "// CLI 返回的字段名是 localizedText"
+    },
+    "1d1d85f497525bd78755e3f8709396d91b65e056": {
+      "en": "// JavaScript",
+      "zh-CN": "// JavaScript"
+    },
+    "1ff2d5a530c19e8a3f42aa09de6380e6f1297f21": {
+      "en": "// Traverse all comments",
+      "zh-CN": "// 遍历所有注释"
+    },
+    "2429942fe2d31ca33da06282b8d486941e5fe421": {
+      "en": "// If settings are not initialized, return an empty array (for test environments)",
+      "zh-CN": "// 如果设置未初始化，返回空数组（用于测试环境）"
+    },
+    "24eb712b66de7f9d627bb1fbb3770e1299f53be3": {
       "en": "// Attempt to retrieve the original English comment from the translation service",
       "zh-CN": "// 尝试从翻译服务获取原始英文注释"
-    },
-    "1caaeb8414f68b6871feb342964e67c9bb6f3a1f": {
-      "en": "/**\n     * Get the original English text of the comment\n     */",
-      "zh-CN": "/**\n     * 获取注释的原始英文文本\n     */"
-    },
-    "1e5a3908043b5f3e0bb56a4d2f197a08b4f78023": {
-      "en": "/**\n     * Get translation data\n     * @param file File\n     * @param forceRefresh Whether to force refresh\n     * @return Translation list\n     */",
-      "zh-CN": "/**\n     * 获取翻译数据\n     * @param file 文件\n     * @param forceRefresh 是否强制刷新\n     * @return 翻译列表\n     */"
-    },
-    "219c59d25c12875304ca82e68106b2a4ecbea3ea": {
-      "en": "// Find matching translation",
-      "zh-CN": "// 查找匹配的翻译"
-    },
-    "2262a9c2ad648d70991a43388850290c453ff01c": {
-      "en": "/**\n         * Create translation display\n         */",
-      "zh-CN": "/**\n         * 创建翻译显示\n         */"
-    },
-    "24d13f4598bd2d6bc9505a7e61b7c098d73eed0f": {
-      "en": "// Check if it is a comment",
-      "zh-CN": "// 检查是否为注释"
-    },
-    "264d75b7f8a7874db21c349c07a3fe4eeb9b0124": {
-      "en": "// Cache translation results",
-      "zh-CN": "// 缓存翻译结果"
     },
     "2684add3923e03318ee3fd45d74a4973c09b66a0": {
       "en": "// Supports Go and Rust files",
@@ -71,57 +79,117 @@
       "en": "// Alarm is disposed automatically",
       "zh-CN": "// 警报器会自动释放"
     },
+    "27e26684c639542a4d6e687ef424e5124a386b6a": {
+      "en": "// Check if it is a translation folding region",
+      "zh-CN": "// 检查是否为翻译折叠区域"
+    },
+    "281816c069286d3c1b3a01fe8dbfa20cdc05ad36": {
+      "en": "// TypeScript",
+      "zh-CN": "// TypeScript"
+    },
     "29dbb7fdf1c4eca47ae54e7765d562ace5fe4146": {
       "en": "// +1 for \\n",
       "zh-CN": "// 为 \\n 加 1"
     },
-    "2c0e882c26a4bb82d3d710e94102308614bd0938": {
-      "en": "// Get the editor corresponding to the file",
-      "zh-CN": "// 获取文件对应的编辑器"
-    },
-    "2d0e64b18f797804ea9eb1953fb5f008cbc3d9e0": {
-      "en": "/**\n * Comment Documentation Provider\n * Displays the original English text when hovering over translated comments\n */",
-      "zh-CN": "/**\n * 注释文档提供者\n * 在鼠标悬停在翻译后的注释上时，显示英文原文\n */"
+    "2b4043810c162ee66cd48e7f1bdcf9f0c84c64f7": {
+      "en": "/**\n * File type utility class\n * Used for unified management of supported file type determination\n */",
+      "zh-CN": "/**\n * 文件类型工具类\n * 用于统一管理支持的文件类型判断\n */"
     },
     "2e1ff5444fd0a7444336e2d8f5a7049747649731": {
       "en": "// Supports Go and Rust files",
       "zh-CN": "// 支持 Go 和 Rust 文件"
     },
-    "32996cae4ff862d4be895229cb3e02baa3e91e30": {
-      "en": "// Traverse all comments",
-      "zh-CN": "// 遍历所有注释"
+    "2e73b24da71ac9daee9ca02d24d90b8a829205af": {
+      "en": "/**\n     * Fold operation with retry\n     */",
+      "zh-CN": "/**\n     * 带重试的折叠操作\n     */"
     },
-    "337faa1c131fa28bd3f50c82d758af69d3c9e1a6": {
-      "en": "// Translated comments typically start with \"// \" and contain Chinese or other translated content",
-      "zh-CN": "// 翻译后的注释通常以 \"// \" 开头且包含中文或其他翻译内容"
+    "30e3c530b1dabc029e5c37b4fd71db2d062a126f": {
+      "en": "// Create translation display",
+      "zh-CN": "// 创建翻译显示"
     },
-    "3465c11824baeb7c1bed9940f6f60d0e068ffac2": {
-      "en": "// Check if it contains non-ASCII characters (such as Chinese, etc.)",
-      "zh-CN": "// 检查是否包含非 ASCII 字符（中文等）"
+    "30e6de3807e040caf18314f89e0ee7971a43787b": {
+      "en": "/**\n         * Format translation text while preserving comment symbols\n         */",
+      "zh-CN": "/**\n         * 格式化翻译文本，保留注释符号\n         */"
     },
-    "362b8b8ab83f5e090aca6208275f84d0c2399953": {
-      "en": "// Check if it is a continuous single-line comment in a Rust file (may be merged into a single PsiComment by PSI)",
-      "zh-CN": "// 检查是否为Rust文件的连续单行注释（可能被PSI合并成一个PsiComment）"
+    "31102bcbfa27051246f75e2af8918a7df4d1a716": {
+      "en": "/**\n     * Format translation text while preserving comment symbols\n     */",
+      "zh-CN": "/**\n     * 格式化翻译文本，保留注释符号\n     */"
     },
-    "40da121dd6571f5d3b97b2bfd3bc04d57a786959": {
-      "en": "// If the cursor is on a comment, return the comment element",
-      "zh-CN": "// 如果光标在注释上，返回注释元素"
+    "32b28ab8a3609b8c1d37c8bbc2f8abfe01e88c53": {
+      "en": "// FoldingBuilder will be re-triggered via updateFolding after the data is ready",
+      "zh-CN": "// FoldingBuilder 会在数据准备好后通过 updateFolding 被重新触发"
     },
-    "4147ec3835642884f2814141e9a141da9b74d49a": {
+    "3387c4a7cf5c43e84a7f1b60fb1228307864fe16": {
+      "en": "// Tooltip (displays translation on mouse hover)",
+      "zh-CN": "// 工具提示 (鼠标悬停显示翻译)"
+    },
+    "345aabbdea51b27d681c54b0a724c01c2bf5f476": {
+      "en": "// If the plugin is not enabled, do not process",
+      "zh-CN": "// 如果插件未启用，不处理"
+    },
+    "35409f9c243b398f70a3a3eebf811809c965f012": {
+      "en": "// Get the editor corresponding to the file",
+      "zh-CN": "// 获取文件对应的编辑器"
+    },
+    "366688e2a56d650ce99e88a115235847fd61a7b3": {
       "en": "// Parameterless constructor, for plugin.xml registration",
       "zh-CN": "// 无参构造函数，供 plugin.xml 注册使用"
+    },
+    "36a83470b0e627771f0b315d9ec06072e41229f8": {
+      "en": "// Format translation text (preserve comment symbols)",
+      "zh-CN": "// 格式化翻译文本（保留注释符号）"
+    },
+    "36eb31d4a62568dfc8cd1d1acb283a4671fe901b": {
+      "en": "/**\n     * Format translation text, preserving comment symbols\n     * If the translation text already contains comment symbols, do not add them again\n     */",
+      "zh-CN": "/**\n     * 格式化翻译文本，保留注释符号\n     * 如果翻译文本已经包含注释符号，则不再重复添加\n     */"
+    },
+    "38dce03223e86d116425e52b4090d65dc78b882e": {
+      "en": "// This is to avoid blocking the UI during rapid scanning",
+      "zh-CN": "// 这是为了避免在快速扫描时阻塞 UI"
+    },
+    "3e697f3a41b9dec4e5e9e82e5f03ee40cc1da7fc": {
+      "en": "// Check if the parent element is a comment",
+      "zh-CN": "// 检查父元素是否为注释"
+    },
+    "3f7ffeb7479992f2f09d08da47ab6b6b18dcd670": {
+      "en": "// Find matching translation",
+      "zh-CN": "// 查找匹配的翻译"
+    },
+    "4321dc523eb55ddee02bfa29e2b05759f1532ef9": {
+      "en": "// Format the translated text",
+      "zh-CN": "// 格式化翻译文本"
+    },
+    "4441e146b0ae0e2f207f7caa7e16c9d582341c8a": {
+      "en": "// If sourceText is empty, return the text of the comment itself",
+      "zh-CN": "// 如果sourceText为空,返回注释本身的文本"
     },
     "445a1be7a3b9fc12b79bdaeeda1a79f7cda1419b": {
       "en": "// Find the matching translation",
       "zh-CN": "// 查找匹配的翻译"
     },
-    "46d614495e0e83bb3aa8039fa0dbe404b6a3f963": {
-      "en": "// Find matching translations for each line",
-      "zh-CN": "// 为每一行查找匹配的翻译"
+    "450e3df28678daf6ae64f843c9893556be5c2b78": {
+      "en": "// Comment type: line, block, doc",
+      "zh-CN": "// 注释类型: line, block, doc"
     },
-    "4aba94e922643f21c7f0ebd9309686a9ab479b2b": {
-      "en": "// Calculate the end offset of this line comment",
-      "zh-CN": "// 计算这一行注释的结束offset"
+    "45e8abda3d15b64e5688cd8d816766e9fb62b4a0": {
+      "en": "// React JavaScript",
+      "zh-CN": "// React JavaScript"
+    },
+    "46fe27ec6c70da0d2dd28800a30a5d57ed62c7fe": {
+      "en": "// Only process supported file types",
+      "zh-CN": "// 只处理支持的文件类型"
+    },
+    "482e37a8a63c9e57fb6b028eef38c9376854741b": {
+      "en": "/**\n * Comment Translation Folding Builder\n * Fold English comments to display Chinese translations, users can expand to view the original English text\n */",
+      "zh-CN": "/**\n * 注释翻译折叠构建器\n * 将英文注释折叠显示为中文翻译，用户可以展开查看英文原文\n */"
+    },
+    "48c2a2f3040f22f8c0e863a63954ef5f63826d07": {
+      "en": "/**\n     * Synchronously fetch translation data (directly calling CLI), running in a background thread to avoid ReadAction/EDT blocking\n     */",
+      "zh-CN": "/**\n     * 同步获取翻译数据（直接调用 CLI），在后台线程运行以避免 ReadAction/EDT 阻塞\n     */"
+    },
+    "4b0134e9834f074965ad03eeceee501cc710987b": {
+      "en": "// Only process comment elements",
+      "zh-CN": "// 只处理注释元素"
     },
     "4cb7934c168628cad0c938297f7334c346acfe6d": {
       "en": "// +1 for \\n",
@@ -131,93 +199,101 @@
       "en": "/* Block comment for demonstration */",
       "zh-CN": "/* 用于演示的块注释 */"
     },
+    "4eb70c63cbcf16abad30b68a89b41670f42f597b": {
+      "en": "// Cache translation results",
+      "zh-CN": "// 缓存翻译结果"
+    },
     "4ebda05d601421447b77bed2e2f651e7037a0857": {
       "en": "/** Outer doc comment\n     * with multiple lines\n     */",
       "zh-CN": "/** 外部文档注释\n     * 包含多行内容\n     */"
     },
-    "4fb9ea20cab35309e6ae618f8dd6360d4ff710d7": {
-      "en": "// Iterate through all comments",
-      "zh-CN": "// 遍历所有注释"
+    "5308ae31a6a68ee1e3b7c77b31ef88cdb2e5db0e": {
+      "en": "/**\n     * Determines if it is a translation placeholder\n     */",
+      "zh-CN": "/**\n     * 判断是否为翻译占位符\n     */"
     },
-    "4fdcdede594585637fc35e37aa26b7438c7fa981": {
-      "en": "// Trigger collapse area update",
-      "zh-CN": "// 触发折叠区域更新"
+    "54cef6d0f70047d1701c7fafb8537d73cce3b561": {
+      "en": "// Calculate the end offset of this line comment",
+      "zh-CN": "// 计算这一行注释的结束offset"
     },
-    "507b4c8872cb6f548b9b566b138e2bea2a291257": {
-      "en": "// Get translation text from cache",
-      "zh-CN": "// 从缓存中获取翻译文本"
+    "577e439bedb587773f0b9f7be814c9f0fc95193f": {
+      "en": "/**\n * Comment translation annotator\n * Displays Chinese translation, hides English original\n */",
+      "zh-CN": "/**\n * 注释翻译注解器\n * 显示中文翻译，隐藏英文原文\n */"
     },
-    "514a4f77d6f60c1154a1bd6d42e984722c11ab24": {
-      "en": "// Comment type: line, block, doc",
-      "zh-CN": "// 注释类型: line, block, doc"
+    "57befb89eb47efe4a4bb14d2102bb6e4eab59bee": {
+      "en": "/**\n * Comment Documentation Provider\n * Displays the original English text when hovering over translated comments\n */",
+      "zh-CN": "/**\n * 注释文档提供者\n * 在鼠标悬停在翻译后的注释上时，显示英文原文\n */"
     },
-    "51a28dac79a3d414e141c536e0b0dc601b7ad382": {
-      "en": "// This is to avoid blocking the UI during rapid scanning",
-      "zh-CN": "// 这是为了避免在快速扫描时阻塞 UI"
+    "583c7b761cfdd19b31f5378e42b7ad580eb733ff": {
+      "en": "/**\n     * Get translation data\n     * @param file File\n     * @param forceRefresh Whether to force refresh\n     * @return Translation list\n     */",
+      "zh-CN": "/**\n     * 获取翻译数据\n     * @param file 文件\n     * @param forceRefresh 是否强制刷新\n     * @return 翻译列表\n     */"
     },
-    "52c115cee3d26e723b8454c31f42adee8df3d4b1": {
-      "en": "// Format translation text (preserve comment symbols)",
-      "zh-CN": "// 格式化翻译文本（保留注释符号）"
+    "58cb2ca96d75bf81e98efebeb18923104eeedc89": {
+      "en": "/**\n     * Determines if the file is supported\n     * @param filename The filename\n     * @return Whether it is supported\n     */",
+      "zh-CN": "/**\n     * 判断文件是否受支持\n     * @param filename 文件名\n     * @return 是否支持\n     */"
     },
-    "54915c8ac63c189463e559c65bb0dd8a63f6f2d1": {
+    "598c19f9c894fb52bcb1061b0ad367e50a1394e3": {
+      "en": "// CommonJS",
+      "zh-CN": "// CommonJS"
+    },
+    "59eb81caf4504b8fea4070b86507ab5384b23758": {
+      "en": "/**\n         * Create translation display\n         */",
+      "zh-CN": "/**\n         * 创建翻译显示\n         */"
+    },
+    "5ba4fa93b8b680afb73aaeb68014a7b875c55ba0": {
+      "en": "// Returns formatted documentation",
+      "zh-CN": "// 返回格式化的文档"
+    },
+    "5bff13e0fcfddbc229259b3ce2f9b91d87b00db8": {
+      "en": "// Add inline inlay at the beginning of the comment",
+      "zh-CN": "// 在注释开始位置添加 inline inlay"
+    },
+    "5e74519151fc3854db9a7c928e1b26199ea195e5": {
+      "en": "// Add tooltip (display original English text)",
+      "zh-CN": "// 添加工具提示（显示英文原文）"
+    },
+    "5eff5a521792f6333fd76152758a350818e6d39a": {
+      "en": "// Returns the stored source text (English original)",
+      "zh-CN": "// 返回存储的源文本(英文原文)"
+    },
+    "5fc368c0effcd35d784fdce87ef71b1ba4962d40": {
+      "en": "// Check if it is in comment format",
+      "zh-CN": "// 检查是否为注释格式"
+    },
+    "60b216fe397ed68f1aa02da79ac8c1f738004d9d": {
+      "en": "// JSDoc",
+      "zh-CN": "// JSDoc"
+    },
+    "627d08565cbf879a514441d384dddd3e3e921e65": {
+      "en": "/**\n     * Update code folding for the file\n     */",
+      "zh-CN": "/**\n     * 更新文件的代码折叠\n     */"
+    },
+    "66fba837a7119930b7b3a54ff98d41224e8f5140": {
+      "en": "// If data exists in the cache, return it directly",
+      "zh-CN": "// 如果缓存中有数据，直接返回"
+    },
+    "6a349371337839a1555d94e6778b50680a09e1b6": {
+      "en": "// Gray (Dark theme)",
+      "zh-CN": "// 灰色（Dark 主题）"
+    },
+    "6a6b1617358f770e90a5a33924a366df70ca94ff": {
       "en": "// 5-second timeout",
       "zh-CN": "// 5秒超时"
     },
-    "57483b88adef4959e56dd60d2466a17f67481106": {
-      "en": "// Create translation display",
-      "zh-CN": "// 创建翻译显示"
+    "6a88c38dde12b98422c144f8d178d7d23ae06f52": {
+      "en": "// Line number side icon (click to show translation)",
+      "zh-CN": "// 行号旁图标 (点击显示翻译)"
     },
-    "59221e5fccfd65cf3f1695242bf88271ef243a4e": {
-      "en": "// Add click event (optional: toggle display on click)",
-      "zh-CN": "// 添加点击事件（可选：点击切换显示）"
+    "6c3f5c867fde6363f88477d1310ca1e9ebca4dc9": {
+      "en": "// Contains Chinese or other non-ASCII characters",
+      "zh-CN": "// 包含中文或其他非 ASCII 字符"
     },
-    "594c58c311f1f5f55502404397a39ea6efa7408f": {
-      "en": "// Click toggle logic can be added here",
-      "zh-CN": "// 可以在这里添加点击切换逻辑"
+    "6ce832f47387eccd6b5a36f2d14f918c3047554f": {
+      "en": "// Single-line or block comments, process directly",
+      "zh-CN": "// 单行注释或块注释，直接处理"
     },
-    "5b490e1cccd18bdd25d86da4f7832cb4546a310d": {
-      "en": "/**\n     * Format translation text, preserving comment symbols\n     * If the translation text already contains comment symbols, do not add them again\n     */",
-      "zh-CN": "/**\n     * 格式化翻译文本，保留注释符号\n     * 如果翻译文本已经包含注释符号，则不再重复添加\n     */"
-    },
-    "5bc6ff5d93dd9ec9159c52e2e88efd661f38be47": {
-      "en": "// Inline hint (display Chinese translation next to the comment)",
-      "zh-CN": "// 内联提示 (注释旁边显示中文翻译)"
-    },
-    "5e8356165b57c1b01aa2d837d638982413cfd932": {
-      "en": "// If the plugin is not enabled, return null",
-      "zh-CN": "// 如果插件未启用，返回 null"
-    },
-    "5efe5b594b031a7e9dfd3f92b18b8e607d89c50b": {
-      "en": "/**\n     * HTML escape\n     */",
-      "zh-CN": "/**\n     * HTML 转义\n     */"
-    },
-    "5f693867455c7eb283ec36abb67fc28fa501f90d": {
-      "en": "// Check if the plugin is enabled and if it is in FOLDING mode",
-      "zh-CN": "// 检查插件是否启用以及是否为 FOLDING 模式"
-    },
-    "611c227836cbbadb59f39ec7d006bd6e4c17e4c8": {
-      "en": "// Find matching translation",
-      "zh-CN": "// 查找匹配的翻译"
-    },
-    "6280e3cdc51d3470c30855d46585b5ca640958dc": {
-      "en": "/**\n     * Cleans comment text, removes comment symbols\n     */",
-      "zh-CN": "/**\n     * 清理注释文本，移除注释符号\n     */"
-    },
-    "67b9faa1cc5af2be9a851d3d9bbf4765baefb3fc": {
-      "en": "// If the plugin is not enabled, return an empty array",
-      "zh-CN": "// 如果插件未启用，返回空数组"
-    },
-    "68678b462579eaf7580b3fa92bd45e5bfb429a58": {
-      "en": "// If the plugin is not enabled, do not collect",
-      "zh-CN": "// 如果插件未启用，不收集"
-    },
-    "6f38dd4521cc74ebedf39b08e3887d1c175c293c": {
-      "en": "// Create folding descriptor",
-      "zh-CN": "// 创建折叠描述符"
-    },
-    "6f9380717e9067f5370f8fb17eb32e4ff14f08f1": {
-      "en": "// Create Chinese translation text",
-      "zh-CN": "// 创建中文翻译文本"
+    "71a1e2f2a23bb54104fbba7c2b828f9a4eea19d8": {
+      "en": "// Format translation text (preserve comment symbols)",
+      "zh-CN": "// 格式化翻译文本（保留注释符号）"
     },
     "7328dc910fb97bfc07c3d173e8da5ea668b8fedd": {
       "en": "// Refresh UI on EDT",
@@ -227,321 +303,317 @@
       "en": "// Supports Go and Rust files",
       "zh-CN": "// 支持 Go 和 Rust 文件"
     },
-    "75cfbeb3f050b78008e0504c9d3cdbc22568b8e2": {
-      "en": "/**\n * File Editor Listener\n * Automatically folds translation comments when Go files are opened\n */",
-      "zh-CN": "/**\n * 文件编辑器监听器\n * 在 Go 文件打开时，自动折叠翻译注释\n */"
-    },
     "778f05f7d3f73516be6ab95ce814e5fac714fffa": {
       "en": "/// Returns the nth fibonacci number",
       "zh-CN": "/// 返回第 n 个斐波那契数"
     },
-    "797a99d63cc92cda8e386f6c1bc4a7a9a43333da": {
-      "en": "// Exclude common non-translation placeholders",
-      "zh-CN": "// 排除常见的非翻译占位符"
+    "7c7cfde5589cd225d9cbd3a843c78e9ac92845ac": {
+      "en": "// Check if it is a continuous single-line comment in a Rust file (may be merged into a single PsiComment by PSI)",
+      "zh-CN": "// 检查是否为Rust文件的连续单行注释（可能被PSI合并成一个PsiComment）"
     },
-    "7a592be309374a581726dfdaa66d7db39ecf2cd0": {
-      "en": "// Default collapsed (showing Chinese translation)",
-      "zh-CN": "// 默认折叠（显示中文翻译）"
-    },
-    "7c0b7f3d6ac02918f95ba55c2c97f2df10a79612": {
-      "en": "/**\n * Comment translation annotator\n * Displays Chinese translation, hides English original\n */",
-      "zh-CN": "/**\n * 注释翻译注解器\n * 显示中文翻译，隐藏英文原文\n */"
-    },
-    "7c121e3b3cfd4dae6e0afe50855b3086eea4db2d": {
-      "en": "// No cache available, need to fetch synchronously",
-      "zh-CN": "// 没有缓存，需要同步获取"
-    },
-    "7f73ec98a3f5bb6ffade2ef773b0296cdba4209a": {
+    "7ea085453c7786115a1fd40eeadb279421cf8498": {
       "en": "// Prefer offset matching (exact match); if that fails, use line number and text content matching",
       "zh-CN": "// 优先使用 offset 匹配（精确匹配），如果失败则使用行号和文本内容匹配"
     },
-    "88a156fe90f4959f5dcc67b67e090a2ef6938dfb": {
-      "en": "// Line number side icon (click to show translation)",
-      "zh-CN": "// 行号旁图标 (点击显示翻译)"
+    "80e526ff53f8dc833d8e647b28b61f1b7b5d57d5": {
+      "en": "// Get translation data",
+      "zh-CN": "// 获取翻译数据"
     },
-    "8b8927e9a6248e61d8510656c672e7921629980d": {
-      "en": "// Method 2: Line number matching + text content matching (suitable for indented comments)",
-      "zh-CN": "// 方法2: 行号匹配 + 文本内容匹配（适用于有缩进的注释）"
+    "826fa09747c4afe7e5f3b1d3ca5fd64d71f69e69": {
+      "en": "// Find matching translations for each line",
+      "zh-CN": "// 为每一行查找匹配的翻译"
     },
-    "8f24e4235c4ca602bb2aca859a464e26d63cd861": {
+    "8378d5b1f739693dcf7a9fb508f99d5cecf96c15": {
       "en": "/**\n     * Inlay Hints Collector\n     */",
       "zh-CN": "/**\n     * Inlay Hints 收集器\n     */"
     },
-    "9118f0019e226c277aaea2b3f4a4ea58738f7930": {
-      "en": "// Using synchronous method to fetch translation data",
-      "zh-CN": "// 使用同步方法获取翻译数据"
+    "87163cf685d28115b27497b97403421c67e1b50e": {
+      "en": "/**\n     * Cleans comment text, removes comment symbols\n     */",
+      "zh-CN": "/**\n     * 清理注释文本，移除注释符号\n     */"
     },
-    "91cc9dc083b8d593ba3eca9fcc361552c216fd98": {
-      "en": "// Check if it is a translation folding region",
-      "zh-CN": "// 检查是否为翻译折叠区域"
+    "89e618188c0a6551e2eea586ece89e2c3c32895f": {
+      "en": "/**\n     * Check if it is a supported file type\n     */",
+      "zh-CN": "/**\n     * 检查是否为支持的文件类型\n     */"
     },
-    "941a34882f71b0c5d3bc180cd641d5992b2ea55e": {
-      "en": "// First time 500ms, subsequent times 1000ms",
-      "zh-CN": "// 首次500ms，后续1000ms"
+    "8adce886d5d03aaca74a7464ccafcfb6f4703e28": {
+      "en": "// If not collapsed into any region, it may be that the translation data is not ready yet, retry",
+      "zh-CN": "// 如果没有折叠到任何区域，可能是翻译数据还没准备好，重试"
     },
-    "9886711d44c89a054da6a5ede2c9f86cd780aca9": {
-      "en": "/**\n     * Update code folding for the file\n     */",
-      "zh-CN": "/**\n     * 更新文件的代码折叠\n     */"
+    "8d1570b371716634ad7db60a206a8a340c8ea1a5": {
+      "en": "// Remove leading and trailing whitespace from the translated text",
+      "zh-CN": "// 去除翻译文本首尾空白"
     },
-    "9906b83bdd73a4ec75a2b4325f7c0f598dde6950": {
+    "8ffca4ceea9f3c59183258238e2d0fa1159563e3": {
+      "en": "// Trigger collapse area update",
+      "zh-CN": "// 触发折叠区域更新"
+    },
+    "92563ba0e6c4f4b3e319b08eb06e988382473cf8": {
       "en": "// Compare the actual content of comments (removing spaces and comment symbols)",
       "zh-CN": "// 比较注释的实际内容（去除空格和注释符号）"
+    },
+    "93bad00e6553553f5ea19753668fff545260cf89": {
+      "en": "// Click toggle logic can be added here",
+      "zh-CN": "// 可以在这里添加点击切换逻辑"
+    },
+    "98d37f34d222666ec07866ebb72f3460d70149e6": {
+      "en": "// If the plugin is not enabled, do not collect",
+      "zh-CN": "// 如果插件未启用，不收集"
     },
     "9aa6a0b41bcf0c55fd754894544814ce8804dede": {
       "en": "// 300ms debounce",
       "zh-CN": "// 300毫秒防抖"
     },
-    "9cdc1f1b7eb7db022ae8d3b4d6a1e0dd11da54c1": {
-      "en": "// Create info annotation, display Chinese translation",
-      "zh-CN": "// 创建信息注解，显示中文翻译"
+    "9b786a356af7e9aeed282cc7503073e80fbfd4de": {
+      "en": "// Rust",
+      "zh-CN": "// Rust"
     },
-    "9dc962c49282436c0563d2b93cd76fa05747f0af": {
-      "en": "// If synchronous acquisition fails, trigger asynchronous refresh",
-      "zh-CN": "// 如果同步获取失败，触发异步刷新"
+    "a3f31a0fb6fa0795756f19be4388d951346274b2": {
+      "en": "// Method 2: Line number matching + text content matching (suitable for indented comments)",
+      "zh-CN": "// 方法2: 行号匹配 + 文本内容匹配（适用于有缩进的注释）"
     },
-    "9e2622c00791e88b17e1d29a644d22bb17fade69": {
-      "en": "/**\n     * Collapse translation comment\n     * @return Number of collapsed regions\n     */",
-      "zh-CN": "/**\n     * 折叠翻译注释\n     * @return 折叠的区域数量\n     */"
+    "a60acc9013fd8b5e53777517a6370906e392c3cb": {
+      "en": "// Check if the translation already starts with //",
+      "zh-CN": "// 检查翻译是否已经以 // 开头"
     },
-    "9e476be4377d5bc4bf2d3a4f1f0bd9bc45bc2a2a": {
-      "en": "// Tooltip (displays translation on mouse hover)",
-      "zh-CN": "// 工具提示 (鼠标悬停显示翻译)"
-    },
-    "a1b7c56e84d9c15f364dd44baf617d6a902a96de": {
-      "en": "// Gray (Light theme)",
-      "zh-CN": "// 灰色（Light 主题）"
-    },
-    "a1bb9cd81a5864370b90278ca402ad13b9b70b97": {
-      "en": "// Split into multiple lines and process line by line",
-      "zh-CN": "// 拆分成多行，逐行处理"
-    },
-    "a1be4ef674a0bd350a23cabab3434e711c920817": {
-      "en": "// If not in cache, trigger background refresh and return empty list",
-      "zh-CN": "// 如果缓存中没有，触发后台刷新并返回空列表"
-    },
-    "a2c4547f4b59e54ccdc4f24d774f780ab2d4f9a3": {
-      "en": "// Format translation text (preserve comment symbols)",
-      "zh-CN": "// 格式化翻译文本（保留注释符号）"
-    },
-    "a4144bbb9e143eaa58ad00d8efe89d77efff8b4d": {
-      "en": "// Gray (Dark theme)",
-      "zh-CN": "// 灰色（Dark 主题）"
+    "a728fe2041c16ec16b594dd2d53041649dbc5b7c": {
+      "en": "/**\n * Inlay Hints Provider for Translation\n * Displays Chinese translation at comment positions and hides the original English text\n */",
+      "zh-CN": "/**\n * 翻译 Inlay Hints 提供者\n * 在注释位置显示中文翻译，隐藏英文原文\n */"
     },
     "a7d8d7d4a045bc2fd83dad9b0296e50289a34214": {
       "en": "// Main entry point",
       "zh-CN": "// 主入口点"
     },
+    "a88bf6251ab8cac39bcc8cf5b4e657aac28b798d": {
+      "en": "// Exclude common non-translation placeholders",
+      "zh-CN": "// 排除常见的非翻译占位符"
+    },
     "aa79cb0c8d48e7f0326fbee832a0bd03526c588c": {
       "en": "// Document access needs ReadAction",
       "zh-CN": "// 文档访问需要 ReadAction"
     },
-    "aa8fad79d2b53a60632d2a81b9425baeafae6d8d": {
-      "en": "// Create text attributes for comment style",
-      "zh-CN": "// 创建注释样式的文本属性"
+    "aa832a1342e3d8ad6ffdc30b04dd18db5d05a0da": {
+      "en": "// For Rust files, we need to process each comment line individually",
+      "zh-CN": "// 对于Rust文件，我们需要将每一行注释单独处理"
     },
-    "aaeda6894c5b71c597e56283be1ca69eb05752c3": {
-      "en": "/**\n     * Fold operation with retry\n     */",
-      "zh-CN": "/**\n     * 带重试的折叠操作\n     */"
+    "ae02e8dfdfb224f6ceb9c843e9e54f1f33a00ce4": {
+      "en": "// Method 1: Exact offset matching (suitable for comments without indentation)",
+      "zh-CN": "// 方法1: 精确 offset 匹配（适用于无缩进的注释）"
     },
-    "ac599b39f18ef5769135ac59fd71d3cde6cea838": {
-      "en": "// Returns formatted documentation",
-      "zh-CN": "// 返回格式化的文档"
+    "af70a3dd163236afb000c0fd8757e6cf48fd47f7": {
+      "en": "// Default collapsed (showing Chinese translation)",
+      "zh-CN": "// 默认折叠（显示中文翻译）"
     },
-    "b215e410a21105d4ef0cad096b3e06bc7eccdc03": {
-      "en": "/**\n     * Determines if it is a translation placeholder\n     */",
-      "zh-CN": "/**\n     * 判断是否为翻译占位符\n     */"
+    "b3ba8ae79ba41602317413c5bef99b28a35c4c14": {
+      "en": "// If the plugin is not enabled, return null",
+      "zh-CN": "// 如果插件未启用，返回 null"
     },
-    "b2e8ac9fac2f092d61d0f8cf1a62eaf3316578d0": {
-      "en": "// If settings are not initialized, return an empty array (for test environments)",
-      "zh-CN": "// 如果设置未初始化，返回空数组（用于测试环境）"
+    "b4a680215f1b2dfbc8f37c33888d6b4ba960bcbb": {
+      "en": "// JSDoc",
+      "zh-CN": "// JSDoc"
     },
-    "b35b76213e3a617f4edb025d06e35080e78e1d18": {
-      "en": "// Execute synchronously in a background thread (avoid running external processes directly within ReadAction)",
-      "zh-CN": "// 在后台线程同步执行（避免在ReadAction内直接运行外部进程）"
+    "b7919733a5127f24100ebc943963cbec295dd500": {
+      "en": "// Gray (Light theme)",
+      "zh-CN": "// 灰色（Light 主题）"
     },
-    "b3cc653ab0372c6c14475593325ba77aa2cf38c9": {
-      "en": "// Delay the folding operation to wait for FoldingBuilder to complete constructing the folding regions",
-      "zh-CN": "// 延迟执行折叠操作，等待 FoldingBuilder 完成构建折叠区域"
-    },
-    "b6e13c23b99cf8794b1d92924afc0666bb4bdab9": {
-      "en": "// If there is no cache, return the default text",
-      "zh-CN": "// 如果没有缓存，返回默认文本"
-    },
-    "bac9ce25e93cede10128c5790bc5bbaac3b79f9a": {
-      "en": "/**\n * Comment Translation Folding Builder\n * Fold English comments to display Chinese translations, users can expand to view the original English text\n */",
-      "zh-CN": "/**\n * 注释翻译折叠构建器\n * 将英文注释折叠显示为中文翻译，用户可以展开查看英文原文\n */"
+    "bad4b8ea27cbbb6e2f59ee17a6424569acf8c376": {
+      "en": "// Find matching translation",
+      "zh-CN": "// 查找匹配的翻译"
     },
     "bb4c6dac798da17ddb5f431b2b6f5fe09d3cc4d3": {
       "en": "// 1-based line number",
       "zh-CN": "// 基于1的行号"
     },
-    "bc5d30fdaced3273d8391a4d78ebd44a034f850f": {
-      "en": "// Only process comment elements",
-      "zh-CN": "// 只处理注释元素"
+    "bc37aa54d46ae5f0bebca7c6b1141470abfc455d": {
+      "en": "// Translated comments typically start with \"// \" and contain Chinese or other translated content",
+      "zh-CN": "// 翻译后的注释通常以 \"// \" 开头且包含中文或其他翻译内容"
     },
-    "bdbd5e68d7f8e6472e69f50ece0c96139e4723cc": {
-      "en": "/**\n     * Format document content as HTML\n     */",
-      "zh-CN": "/**\n     * 格式化文档内容为 HTML\n     */"
+    "be40ad007ca8d62a6e08dfa733df168362985904": {
+      "en": "// React TypeScript",
+      "zh-CN": "// React TypeScript"
     },
-    "be5c9e461906a342467a8782da20c7bd40401165": {
-      "en": "// Skip in quick mode, wait for full mode execution",
-      "zh-CN": "// quick 模式下跳过，等待完整模式执行"
+    "bf1c5601ba5bf7b9cc8ba25a51d6d405aaead13e": {
+      "en": "// If synchronous acquisition fails, trigger asynchronous refresh",
+      "zh-CN": "// 如果同步获取失败，触发异步刷新"
+    },
+    "bf7b904c798a2fccd02e1761580293f02afe5093": {
+      "en": "// Multiple delayed attempts are needed because translation data may require time to fetch",
+      "zh-CN": "// 需要多次延迟尝试，因为翻译数据可能需要时间获取"
     },
     "c026df5201b820060688fae515dc1e6a25ae5fb9": {
       "en": "// For testing",
       "zh-CN": "// 用于测试"
     },
-    "c3496cf11075bb2c3328894e0e474c446b167b1d": {
-      "en": "// Check if the parent element is a comment",
-      "zh-CN": "// 检查父元素是否为注释"
-    },
-    "c3614762800c0c6c685a3c2decf9d5ea751804a4": {
+    "c19dead36360b4a1c15942af71d5b17de3e8ddab": {
       "en": "// Execute in the folding batch",
       "zh-CN": "// 在折叠批处理中执行"
     },
-    "c3cb1e4063482ee7ceb895ce7191295fac285318": {
-      "en": "// Single-line or block comments, process directly",
-      "zh-CN": "// 单行注释或块注释，直接处理"
+    "c23de3664b817f0fd544f0a586119f9d0cc7bc8d": {
+      "en": "// Skip in quick mode, wait for full mode execution",
+      "zh-CN": "// quick 模式下跳过，等待完整模式执行"
     },
-    "c4580d25f1e51fa1e8eeebbdafb843251895e617": {
-      "en": "/**\n * Inlay Hints Provider for Translation\n * Displays Chinese translation at comment positions and hides the original English text\n */",
-      "zh-CN": "/**\n * 翻译 Inlay Hints 提供者\n * 在注释位置显示中文翻译，隐藏英文原文\n */"
+    "c5617370590a40e7523388dba20ae910a3434762": {
+      "en": "/**\n     * Get the original English text of the comment\n     */",
+      "zh-CN": "/**\n     * 获取注释的原始英文文本\n     */"
     },
-    "c5203f87d37601b51a4ff99825fa3ab6ecb3488f": {
-      "en": "/**\n     * Synchronously fetches translation data (with timeout), used for FoldingBuilder\n     * @param file The file\n     * @param timeoutMs Timeout duration (milliseconds)\n     * @return Translation list\n     */",
-      "zh-CN": "/**\n     * 同步获取翻译数据（带超时），用于 FoldingBuilder\n     * @param file 文件\n     * @param timeoutMs 超时时间（毫秒）\n     * @return 翻译列表\n     */"
+    "c73f4aa673047ca9dc472891085ce04947b9866b": {
+      "en": "// Create text attributes for comment style",
+      "zh-CN": "// 创建注释样式的文本属性"
     },
-    "c860a58ad25a1c0d51b1af6f04d98a0b91b3a553": {
-      "en": "// If not collapsed into any region, it may be that the translation data is not ready yet, retry",
-      "zh-CN": "// 如果没有折叠到任何区域，可能是翻译数据还没准备好，重试"
+    "c86d07c2b7dc8b4d04f7c73c92a705a386f88b02": {
+      "en": "// If there is no translation data, directly display the original comment text",
+      "zh-CN": "// 如果没有翻译数据，直接显示注释原文"
     },
     "c9d1000b1ebd86c9582bd4bf9f136274f08d8726": {
       "en": "// relatesToPrecedingText",
       "zh-CN": "// 与前面的文本相关"
     },
-    "cb2b9db5f12c63bf336ed3d9d13a8ddeeb40a8c9": {
-      "en": "// Check if the translation already starts with //",
-      "zh-CN": "// 检查翻译是否已经以 // 开头"
+    "cc73eee4109e5039940eb68aa85069f15f1c48e0": {
+      "en": "// JavaScript Module",
+      "zh-CN": "// JavaScript 模块"
     },
-    "cf60f16d1c33df2d5c534c84a6c86b6fe421ab00": {
-      "en": "// Add inline inlay at the beginning of the comment",
-      "zh-CN": "// 在注释开始位置添加 inline inlay"
-    },
-    "cf84e24d2da5d4f01952881838aeb0e0ead855aa": {
-      "en": "// Only process supported file types (Go and Rust)",
-      "zh-CN": "// 仅处理支持的文件类型（Go 和 Rust）"
-    },
-    "d0bcd73dcabb4ff1e28fb51de7f012c1f3441985": {
-      "en": "// Trigger code folding update",
-      "zh-CN": "// 触发代码折叠更新"
+    "cf81b3e8847375b9fe3bab3517b034093fb9c868": {
+      "en": "// Split into multiple lines and process line by line",
+      "zh-CN": "// 拆分成多行，逐行处理"
     },
     "d166b9a2a8bf2a72d298908beab9af8cafe0926a": {
       "en": "// Get translation data",
       "zh-CN": "// 获取翻译数据"
     },
-    "d41f9a4be9b0518c2698c9c235347dafca935937": {
-      "en": "// Contains Chinese or other non-ASCII characters",
-      "zh-CN": "// 包含中文或其他非 ASCII 字符"
+    "d178938b35c7222a7cb82c813a520886f01b1c11": {
+      "en": "// Trigger the code analyzer to re-analyze",
+      "zh-CN": "// 触发代码分析器重新分析"
+    },
+    "d3867ea0c36c1c4964f7cdefab1842bceb759f6c": {
+      "en": "// Supported file extension collection",
+      "zh-CN": "// 支持的文件扩展名集合"
     },
     "d4522da385bab095e8aee25e167764ff37e944a9": {
       "en": "// showAbove",
       "zh-CN": "// 显示在上方"
     },
-    "d49f97ad67b85b60b1fc017007bb2aadd5fa6084": {
-      "en": "// If there is no translation data, directly display the original comment text",
-      "zh-CN": "// 如果没有翻译数据，直接显示注释原文"
+    "d45c78b567dc8097c9d1ee2237cb64725028a57c": {
+      "en": "/**\n     * Collapse translation comment\n     * @return Number of collapsed regions\n     */",
+      "zh-CN": "/**\n     * 折叠翻译注释\n     * @return 折叠的区域数量\n     */"
+    },
+    "d7f2eb20cd3a54279e36c9e405818b2ae43596cf": {
+      "en": "// Create folding descriptor",
+      "zh-CN": "// 创建折叠描述符"
+    },
+    "d8112f3bb25354373855d4c687eb06dc3e245050": {
+      "en": "// If the plugin is not enabled, return an empty array",
+      "zh-CN": "// 如果插件未启用，返回空数组"
     },
     "d83b3e978af3cdc363718acee9540c2bbbfec464": {
       "en": "//! This is an inner doc comment",
       "zh-CN": "//! 这是一个内部文档注释"
     },
-    "da991d9d47a1e6959528e7c8d71c7ed535f4d36d": {
-      "en": "// Remove leading and trailing whitespace from the translated text",
-      "zh-CN": "// 去除翻译文本首尾空白"
+    "d9ae9818ef21a56f842f1b84be70a5c29d529990": {
+      "en": "// Only process supported file types (Go and Rust)",
+      "zh-CN": "// 仅处理支持的文件类型（Go 和 Rust）"
+    },
+    "da8377ca698edddda1dd29a86798669e94caafa5": {
+      "en": "// Iterate through all comments",
+      "zh-CN": "// 遍历所有注释"
+    },
+    "db7d1a03d283dba0740d8cfbd040a352991f4425": {
+      "en": "// Inline hint (display Chinese translation next to the comment)",
+      "zh-CN": "// 内联提示 (注释旁边显示中文翻译)"
+    },
+    "dbb35025c58ff1eb44ebd2b125e6109418e0ee0d": {
+      "en": "// Check if it contains non-ASCII characters (such as Chinese, etc.)",
+      "zh-CN": "// 检查是否包含非 ASCII 字符（中文等）"
     },
     "dc2d8ae1d7e2fda1ef0a6c19d78af5d59cbb5ddc": {
       "en": "// TEMPORARY: Force log CLI response to debug the issue",
       "zh-CN": "// 临时：强制记录 CLI 响应以调试此问题"
     },
-    "dc485aecb69ed31f5463d18fd403a0f83957bc2c": {
-      "en": "// The field name returned by CLI is localizedText",
-      "zh-CN": "// CLI 返回的字段名是 localizedText"
-    },
-    "dd48ece15e8eaaad633d15f4add91f3de83fc49c": {
-      "en": "// If not in FOLDING mode, return an empty array",
-      "zh-CN": "// 如果不是 FOLDING 模式，返回空数组"
-    },
-    "deb449a07a42bd36cd891001be01018261d89fd4": {
-      "en": "// If the plugin is not enabled, do not process",
-      "zh-CN": "// 如果插件未启用，不处理"
-    },
-    "e45b183f6612ba5fb55a6e46d693aa4ec29c9be6": {
-      "en": "// Collapsed display (English comments are collapsed and displayed as Chinese translation, click to expand to view the original)",
-      "zh-CN": "// 折叠显示 (英文注释折叠显示为中文翻译，点击展开查看原文)"
-    },
-    "e598f340942687a62e0718ca40eca79e56ffbded": {
-      "en": "// If sourceText is empty, return the text of the comment itself",
-      "zh-CN": "// 如果sourceText为空,返回注释本身的文本"
-    },
-    "e5bc24bb92f355933cbdbbe7b19dee2d38d8110d": {
-      "en": "/**\n         * Format translation text while preserving comment symbols\n         */",
-      "zh-CN": "/**\n         * 格式化翻译文本，保留注释符号\n         */"
-    },
-    "ea0c794082aaba376a9e6576aee2554b6607020d": {
+    "dca86037d552c3ffe13abab4247e96c10ce7957a": {
       "en": "// Ignore errors, return the comment's own text as fallback",
       "zh-CN": "// 忽略错误,返回注释本身的文本作为后备"
+    },
+    "dce7a5aa0bf99fcba026246b798e934326d95786": {
+      "en": "/**\n     * HTML escape\n     */",
+      "zh-CN": "/**\n     * HTML 转义\n     */"
+    },
+    "ddac748a271516a81f04f2b18386510edd768da3": {
+      "en": "// Add click event (optional: toggle display on click)",
+      "zh-CN": "// 添加点击事件（可选：点击切换显示）"
+    },
+    "decedcf95ab3a90e2072a2253cfbc2c07da62d4a": {
+      "en": "// If there is no cache, return the default text",
+      "zh-CN": "// 如果没有缓存，返回默认文本"
+    },
+    "e1604f8a83372145bc9f9076c3fa0ccb1fc4bae2": {
+      "en": "// If not in cache, trigger background refresh and return empty list",
+      "zh-CN": "// 如果缓存中没有，触发后台刷新并返回空列表"
+    },
+    "e5e8cd2dcbb97eff50b4bec1d95c4dac7840f439": {
+      "en": "/**\n     * Synchronously fetches translation data (with timeout), used for FoldingBuilder\n     * @param file The file\n     * @param timeoutMs Timeout duration (milliseconds)\n     * @return Translation list\n     */",
+      "zh-CN": "/**\n     * 同步获取翻译数据（带超时），用于 FoldingBuilder\n     * @param file 文件\n     * @param timeoutMs 超时时间（毫秒）\n     * @return 翻译列表\n     */"
+    },
+    "e9532e80cc2c74392ec20d90de12fe2352b89154": {
+      "en": "// Only process supported file types",
+      "zh-CN": "// 只处理支持的文件类型"
+    },
+    "ea39855d2447392de2bd1d38f028ed7d2ee51a43": {
+      "en": "// For compatibility, keep the getTranslation method",
+      "zh-CN": "// 为了兼容性,保留 getTranslation 方法"
+    },
+    "eaba739ccba1e064eac6c26c38fe6a2c92e59999": {
+      "en": "/**\n * File Editor Listener\n * Automatically folds translation comments when Go files are opened\n */",
+      "zh-CN": "/**\n * 文件编辑器监听器\n * 在 Go 文件打开时，自动折叠翻译注释\n */"
+    },
+    "eac96479c4c905a6de9afb8e737399bb8f89c732": {
+      "en": "// If not in FOLDING mode, return an empty array",
+      "zh-CN": "// 如果不是 FOLDING 模式，返回空数组"
     },
     "ec8f0f790243f4a2a148e847362a82f9ea41107c": {
       "en": "// Capture content in current thread (likely ReadAction or EDT)",
       "zh-CN": "// 在当前线程（可能是 ReadAction 或 EDT）中捕获内容"
     },
-    "f1c8a138cb7bc60dea751a1be9b0d97c4516397a": {
-      "en": "// Format the translated text",
-      "zh-CN": "// 格式化翻译文本"
+    "f0e13457234035cabdae7f91f809784e6aa73c21": {
+      "en": "// Check if the translation is already in block comment format",
+      "zh-CN": "// 检查翻译是否已经是块注释格式"
     },
-    "f25594b4bb9ff16df600167ec3ba109b8206aed3": {
-      "en": "// For Rust files, we need to process each comment line individually",
-      "zh-CN": "// 对于Rust文件，我们需要将每一行注释单独处理"
+    "f1995ebdf363f2a75545a8de351abeffa8ece8ab": {
+      "en": "// Check if it is a comment",
+      "zh-CN": "// 检查是否为注释"
     },
-    "f2e72b80b79105139b83e244c093a74aac36966e": {
-      "en": "// Check if it is in comment format",
-      "zh-CN": "// 检查是否为注释格式"
+    "f244bbfb403d1b05344a4424c2b4ee0bb1c1986e": {
+      "en": "// Delay the folding operation to wait for FoldingBuilder to complete constructing the folding regions",
+      "zh-CN": "// 延迟执行折叠操作，等待 FoldingBuilder 完成构建折叠区域"
     },
-    "f3c6acf8f2731128ae4168f0ebde1cdb16d8368c": {
-      "en": "// Use static Alarm because the listener may be instantiated multiple times",
-      "zh-CN": "// 使用静态 Alarm，因为监听器可能被多次实例化"
+    "f373ca787a92e960e2460028cbbe97915aeecebf": {
+      "en": "// Execute synchronously in a background thread (avoid running external processes directly within ReadAction)",
+      "zh-CN": "// 在后台线程同步执行（避免在ReadAction内直接运行外部进程）"
+    },
+    "f3f3000b827d951ee74e9d44396403b44740e43d": {
+      "en": "// Cache translation results for the getPlaceholderText method",
+      "zh-CN": "// 缓存翻译结果，用于getPlaceholderText方法"
+    },
+    "f5782494ecc550e80091f7ce69bd894de88e13db": {
+      "en": "// Only process supported file types",
+      "zh-CN": "// 只处理支持的文件类型"
     },
     "f6bb9a9cca42c21181851dc8458c0103b8ee0181": {
       "en": "// 1-based",
       "zh-CN": "// 基于 1 的索引"
     },
-    "f74f555117cce900ad687fe7a49adbbdf33f3664": {
-      "en": "// Get translation data",
-      "zh-CN": "// 获取翻译数据"
-    },
-    "f7c03e91bfc473a4deb71a8519fa37394e3d67f7": {
-      "en": "// FoldingBuilder will be re-triggered via updateFolding after the data is ready",
-      "zh-CN": "// FoldingBuilder 会在数据准备好后通过 updateFolding 被重新触发"
-    },
-    "f7f5075ac12ca343e7cfc4bb5159ee2a023d154e": {
-      "en": "// Trigger the code analyzer to re-analyze",
-      "zh-CN": "// 触发代码分析器重新分析"
-    },
-    "f8a74716001d74445701bcb4e7f40757416200c6": {
-      "en": "// For compatibility, keep the getTranslation method",
-      "zh-CN": "// 为了兼容性,保留 getTranslation 方法"
+    "f954b1c8740e9e8d2dfc21ff80fad7f7e1750df4": {
+      "en": "// If the cursor is on a comment, return the comment element",
+      "zh-CN": "// 如果光标在注释上，返回注释元素"
     },
     "f9637d0e5cd329c1af833cb0405ada4b2e4e046b": {
       "en": "// Calculate fibonacci numbers",
       "zh-CN": "// 计算斐波那契数列"
     },
-    "f9dcf41b52c80932ec7504540194b6056b834da3": {
-      "en": "// If data exists in the cache, return it directly",
-      "zh-CN": "// 如果缓存中有数据，直接返回"
+    "fe78ae9273afdb1e5db95d7539bf733e522ade67": {
+      "en": "// Get translation text from cache",
+      "zh-CN": "// 从缓存中获取翻译文本"
     },
-    "fe135cd40991561f4e3862eb7b4e9094ade2e569": {
-      "en": "// Cache translation results for the getPlaceholderText method",
-      "zh-CN": "// 缓存翻译结果，用于getPlaceholderText方法"
+    "ff17bda110be0f57d67c1efea32dab71cc2e9543": {
+      "en": "// Use static Alarm because the listener may be instantiated multiple times",
+      "zh-CN": "// 使用静态 Alarm，因为监听器可能被多次实例化"
     }
   }
 }

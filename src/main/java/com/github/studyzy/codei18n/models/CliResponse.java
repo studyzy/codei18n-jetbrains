@@ -14,10 +14,10 @@ public record CliResponse(
         String symbol,
         TextRange range,
         String sourceText,
-        String type,  // 注释类型: line, block, doc
-        String localizedText  // CLI 返回的字段名是 localizedText
+        String type,  // Comment type: line, block, doc
+        String localizedText  // The field name returned by CLI is localizedText
     ) {
-        // 为了兼容性,保留 getTranslation 方法
+        // For compatibility, keep the getTranslation method
         public String getTranslation() {
             return localizedText;
         }
