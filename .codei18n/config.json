@@ -4,8 +4,10 @@
   "excludePatterns": [
     ".git/**",
     "vendor/**",
-    ".codei18n/**"
+    ".codei18n/**",
+    "build/**",
+    ".gradle/**",
+    ".intellijPlatform/**"
   ],
-  "translationProvider": "mock",
-  "translationConfig": {}
+  "batchSize": 20
 }

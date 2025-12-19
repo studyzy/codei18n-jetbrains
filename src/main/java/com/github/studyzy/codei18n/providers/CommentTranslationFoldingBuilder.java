@@ -4,6 +4,7 @@ import com.github.studyzy.codei18n.models.TranslatedComment;
 import com.github.studyzy.codei18n.services.TranslationService;
 import com.github.studyzy.codei18n.settings.DisplayMode;
 import com.github.studyzy.codei18n.settings.PluginSettings;
+import com.github.studyzy.codei18n.utils.FileUtils;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.FoldingBuilderEx;
 import com.intellij.lang.folding.FoldingDescriptor;
@@ -236,6 +237,11 @@ public class CommentTranslationFoldingBuilder extends FoldingBuilderEx {
                 return trimmedTranslation;
             }
             return "// " + trimmedTranslation;
+        } else if (originalComment.startsWith("/**") && originalComment.endsWith("*/")) { // JSDoc
+             if (trimmedTranslation.startsWith("/**") && trimmedTranslation.endsWith("*/")) {
+                return trimmedTranslation;
+            }
+            return "/** " + trimmedTranslation + " */";
         } else if (originalComment.startsWith("/*") && originalComment.endsWith("*/")) {
             // 检查翻译是否已经是块注释格式
             if (trimmedTranslation.startsWith("/*") && trimmedTranslation.endsWith("*/")) {
@@ -248,13 +254,9 @@ public class CommentTranslationFoldingBuilder extends FoldingBuilderEx {
     
     /**
      * 检查是否为支持的文件类型
-     * 当前支持：Go (.go), Rust (.rs)
      */
     private boolean isSupportedFile(PsiElement root) {
         String filename = root.getContainingFile().getName();
-        if (filename == null) {
-            return false;
-        }
-        return filename.endsWith(".go") || filename.endsWith(".rs");
+        return FileUtils.isSupportedFile(filename);
     }
 }

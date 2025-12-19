@@ -1,0 +1,13 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- JavaScript support -->
+        <lang.foldingBuilder language="JavaScript" implementationClass="com.github.studyzy.codei18n.providers.CommentTranslationFoldingBuilder"/>
+        <annotator language="JavaScript" implementationClass="com.github.studyzy.codei18n.providers.CommentTranslationAnnotator"/>
+        <codeInsight.inlayProvider language="JavaScript" implementationClass="com.github.studyzy.codei18n.providers.TranslationInlayHintsProvider"/>
+
+        <!-- TypeScript support -->
+        <lang.foldingBuilder language="TypeScript" implementationClass="com.github.studyzy.codei18n.providers.CommentTranslationFoldingBuilder"/>
+        <annotator language="TypeScript" implementationClass="com.github.studyzy.codei18n.providers.CommentTranslationAnnotator"/>
+        <codeInsight.inlayProvider language="TypeScript" implementationClass="com.github.studyzy.codei18n.providers.TranslationInlayHintsProvider"/>
+    </extensions>
+</idea-plugin>

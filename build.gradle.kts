@@ -50,8 +50,14 @@ dependencies {
         // Configure bundled plugins based on IDE type - only when not using local path
         if (localIdePath == null) {
             when (ideType) {
-                "GO" -> bundledPlugin("org.jetbrains.plugins.go")
-                "RR" -> bundledPlugin("com.jetbrains.rust")
+                "GO" -> {
+                    bundledPlugin("org.jetbrains.plugins.go")
+                    bundledPlugin("JavaScript")
+                }
+                "RR" -> {
+                    bundledPlugin("com.jetbrains.rust")
+                    bundledPlugin("JavaScript")
+                }
                 else -> {}
             }
         }

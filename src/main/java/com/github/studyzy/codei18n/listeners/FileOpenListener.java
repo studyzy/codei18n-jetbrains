@@ -2,6 +2,7 @@ package com.github.studyzy.codei18n.listeners;
 
 import com.github.studyzy.codei18n.settings.DisplayMode;
 import com.github.studyzy.codei18n.settings.PluginSettings;
+import com.github.studyzy.codei18n.utils.FileUtils;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
@@ -33,9 +34,8 @@ public class FileOpenListener implements FileEditorManagerListener {
     
     @Override
     public void fileOpened(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
-        // 支持 Go 和 Rust 文件
-        String filename = file.getName();
-        if (!filename.endsWith(".go") && !filename.endsWith(".rs")) {
+        // 只处理支持的文件类型
+        if (!FileUtils.isSupportedFile(file.getName())) {
             return;
         }
         
@@ -46,7 +46,7 @@ public class FileOpenListener implements FileEditorManagerListener {
             return;
         }
         
-        LOG.info("Go file opened: " + file.getName() + ", scheduling fold collapse");
+        LOG.info("Supported file opened: " + file.getName() + ", scheduling fold collapse");
         
         Project project = source.getProject();
         

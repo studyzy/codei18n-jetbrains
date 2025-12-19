@@ -3,6 +3,7 @@ package com.github.studyzy.codei18n.providers;
 import com.github.studyzy.codei18n.models.TranslatedComment;
 import com.github.studyzy.codei18n.services.TranslationService;
 import com.github.studyzy.codei18n.settings.PluginSettings;
+import com.github.studyzy.codei18n.utils.FileUtils;
 import com.intellij.codeInsight.hints.*;
 import com.intellij.codeInsight.hints.presentation.InlayPresentation;
 import com.intellij.codeInsight.hints.presentation.PresentationFactory;
@@ -106,9 +107,8 @@ public class TranslationInlayHintsProvider implements InlayHintsProvider<NoSetti
                 return true;
             }
             
-            // 支持 Go 和 Rust 文件
-            String filename = file.getName();
-            if (!filename.endsWith(".go") && !filename.endsWith(".rs")) {
+            // 只处理支持的文件类型
+            if (!FileUtils.isSupportedFile(file.getName())) {
                 return true;
             }
             
@@ -205,6 +205,8 @@ public class TranslationInlayHintsProvider implements InlayHintsProvider<NoSetti
                 return "//! " + translation;
             } else if (originalComment.startsWith("//")) {
                 return "// " + translation;
+            } else if (originalComment.startsWith("/**") && originalComment.endsWith("*/")) { // JSDoc
+                return "/** " + translation + " */";
             } else if (originalComment.startsWith("/*") && originalComment.endsWith("*/")) {
                 return "/* " + translation + " */";
             }

@@ -3,6 +3,7 @@ package com.github.studyzy.codei18n.providers;
 import com.github.studyzy.codei18n.models.TranslatedComment;
 import com.github.studyzy.codei18n.services.TranslationService;
 import com.github.studyzy.codei18n.settings.PluginSettings;
+import com.github.studyzy.codei18n.utils.FileUtils;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.lang.annotation.HighlightSeverity;
@@ -39,9 +40,8 @@ public class CommentTranslationAnnotator implements Annotator {
             return;
         }
         
-        // 支持 Go 和 Rust 文件
-        String filename = element.getContainingFile().getName();
-        if (!filename.endsWith(".go") && !filename.endsWith(".rs")) {
+        // 只处理支持的文件类型
+        if (!FileUtils.isSupportedFile(element.getContainingFile().getName())) {
             return;
         }
         
@@ -102,6 +102,8 @@ public class CommentTranslationAnnotator implements Annotator {
             return "//! " + translation;
         } else if (originalComment.startsWith("//")) {
             return "// " + translation;
+        } else if (originalComment.startsWith("/**") && originalComment.endsWith("*/")) { // JSDoc
+            return "/** " + translation + " */";
         } else if (originalComment.startsWith("/*") && originalComment.endsWith("*/")) {
             return "/* " + translation + " */";
         }

@@ -6,7 +6,7 @@
     <description><![CDATA[
     Internationalization for code comments.<br>
     Display translated comments in your IDE without modifying the source code.<br>
-    Supports: Go (.go), Rust (.rs)
+    Supports: Go (.go), Rust (.rs), JavaScript/TypeScript (.js, .ts, etc.)
     ]]></description>
 
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
@@ -17,6 +17,8 @@
     <!-- Rust 插件依赖设为可选，支持在 GoLand 中运行 -->
     <!-- RustRover 中 Rust 插件的 ID 是 com.jetbrains.rust -->
     <depends optional="true" config-file="rust-support.xml">com.jetbrains.rust</depends>
+    <!-- JavaScript 插件依赖设为可选 -->
+    <depends optional="true" config-file="javascript-support.xml">JavaScript</depends>
 
     <projectListeners>
         <listener class="com.github.studyzy.codei18n.listeners.FileOpenListener"
